@@ -1,1 +1,7 @@
-<p>pizza works!</p>
+<h1>Our pizza's</h1>
+<ul>
+    <li *ngFor="let pizza of pizzas">{{pizza.name}} {{pizza.price}} euros</li>
+</ul>
+
+<button (click)="getPizzas()">Mettre a jour</button>
+

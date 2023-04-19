@@ -24,13 +24,4 @@ export class PizzaComponent {
       }
     )
   }
-  getPizzas(){
-    this.restaurantService.getPizzas().subscribe(
-      data => {
-        this.pizzas = data;
-        console.log(this.pizzas);
-      }
-    )
-  }
-
 }
