@@ -14,7 +14,7 @@ export class Pizza{
   providedIn: 'root'
 })
 export class UserService {
-  base_url ="http://localhost:3000/api"
+  base_url ="http://pat.infolab.ecam.be:60836/api"
   constructor(private http :HttpClient) { 
 
   }
@@ -23,8 +23,8 @@ export class UserService {
   //   return this.http.post(this.base_url+"/login")
   // }
 
-  getPizzas():Observable<any>{
-    return this.http.get(this.base_url+"/pizzas")
-  }
+  // getPizzas():Observable<any>{
+  //   return this.http.get(this.base_url+"/pizzas")
+  // }
 
 }

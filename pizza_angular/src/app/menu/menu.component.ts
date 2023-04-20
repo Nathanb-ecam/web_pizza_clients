@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Pizza, UserService } from '../user.service';
+import { Product,RestaurantService } from '../restaurant.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,12 +7,12 @@ import { Pizza, UserService } from '../user.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
-  pizzas:Pizza[]= [];
-  constructor(private userService : UserService){
+  pizzas:Product[]= [];
+  constructor(private restauService : RestaurantService){
 
   }
   ngOnInit(){
-    this.userService.getPizzas().subscribe(
+    this.restauService.getPizzas().subscribe(
       data => {
         this.pizzas = data;
         console.log(this.pizzas);

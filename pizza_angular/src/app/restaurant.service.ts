@@ -6,7 +6,6 @@ export class Product{
   "id":number;
   "name":string;
   "price":number;
-
 }
 
 
@@ -14,7 +13,7 @@ export class Product{
   providedIn: 'root'
 })
 export class RestaurantService {
-  base_url = "http://localhost:3000/api"
+  base_url = "http://pat.infolab.ecam.be:60836/api"
 
   constructor(private http : HttpClient) {
 
