@@ -1,4 +1,18 @@
-<button (click)="login()">Login</button>
+<div class="form" *ngIf="!signedIn">
+    <form (ngSubmit)="login()">
+        <h2>Se connecter</h2>
+        <div>
+            <input type="text" id="name" name="name" [(ngModel)]="name" placeholder="Nom" required>
+            <input type="password" id="password" name="password" [(ngModel)]="password" placeholder="Mot de passe"required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+
+
+
+
 <p>token : {{token.token}}</p>
 <p>isAdmin :  {{isAdmin}}</p>
 <div class="content" *ngIf="signedIn">

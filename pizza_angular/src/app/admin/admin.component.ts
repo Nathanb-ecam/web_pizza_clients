@@ -9,10 +9,13 @@ import { Menu,OrderExtra,Client,User,Token } from '../admin.service';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
+  name:string="";
+  password:string="";
+
+
   menus:Menu[]=[]
   orderextras:OrderExtra[]=[]
   clients:Client[]=[]
-  user:User ={"name":"Nath","password":"1234"};
 
 
   token:Token=new Token()
@@ -29,7 +32,8 @@ export class AdminComponent {
   }
 
   login(){
-    this.adminService.login(this.user).subscribe(
+    let user:User = {"name":this.name,"password":this.password}
+    this.adminService.login(user).subscribe(
       data => {
         this.token = data;
         console.log(this.token);

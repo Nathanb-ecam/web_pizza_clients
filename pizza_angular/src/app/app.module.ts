@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { MenuComponent, NotNullPipe } from './menu/menu.component';
 import { PizzaComponent } from './pizza/pizza.component';
 import { AdminComponent } from './admin/admin.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,12 +16,13 @@ import { AdminComponent } from './admin/admin.component';
     MenuComponent,
     PizzaComponent,
     AdminComponent,
-    NotNullPipe
+    NotNullPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
