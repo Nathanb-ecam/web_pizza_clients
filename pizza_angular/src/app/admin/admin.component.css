@@ -1,0 +1,43 @@
+.content {
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+}
+.content h1{
+    border-bottom: 2px solid gray;
+    width: 100%;
+}
+.content div{
+    width: 80%;
+}
+
+.content div h2{
+    border-bottom: 1px solid black;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead{
+    text-align: center;
+    border: 1px solid rgb(192, 192, 192);
+}
+
+tbody .row:nth-child(odd){
+    background: lightgray;
+}
+
+tbody tr .item{
+    text-align: center;
+    border: none;
+}
+
+.delete_button{
+    background: inherit;
+    border: none;
+}

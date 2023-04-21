@@ -1,0 +1,72 @@
+<button (click)="login()">Login</button>
+<p>token : {{token.token}}</p>
+<p>isAdmin :  {{isAdmin}}</p>
+<div class="content" *ngIf="signedIn">
+    <h1>Admin dashboard</h1>
+    <div class="menus" *ngIf="menus.length>0">
+        <h2>Gestion des Menus</h2>
+        <table class="list">
+            <thead class="titles">
+                <th>Menu_id</th>
+                <th>idSauce</th>
+                <th>idChicken</th>
+                <th>idPizza</th>
+                <th>idDrink</th>
+            </thead>
+            <tbody class="rows">
+                <tr *ngFor="let menu of menus;" class="row">
+                    <td class = "item">{{menu.menu_id}}</td>
+                    <td class = "item">{{menu.idSauce}}</td>
+                    <td class = "item">{{menu.idChicken}}</td>
+                    <td class = "item">{{menu.idPizza}}</td>
+                    <td class = "item">{{menu.idDrink}}</td>
+                    <td><button class="delete_button">X</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="orderextras" *ngIf="orderextras.length>0">
+        <h2>Gestion des Suppléments</h2>
+        <table class="list">
+            <thead class="titles">
+                <th>idOrderExtra</th>
+                <th>idOrder</th>
+                <th>idExtraDrink</th>
+                <th>idExtraPizza</th>
+                <th>idExtraChicken</th>
+                <th>idExtraSauce</th>
+            </thead>
+            <tbody class="rows">
+                <tr *ngFor="let orderextra of orderextras;" class="row">
+                    <td class = "item">{{orderextra.idOrderExtra}}</td>
+                    <td class = "item">{{orderextra.idOrder}}</td>
+                    <td class = "item">{{orderextra.idExtraDrink}}</td>
+                    <td class = "item">{{orderextra.idExtraPizza}}</td>
+                    <td class = "item">{{orderextra.idExtraChicken}}</td>
+                    <td class = "item">{{orderextra.idExtraSauce}}</td>
+                    <td><button class="delete_button">X</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="clients" *ngIf="clients.length>0">
+        <h2>Gestion des Clients</h2>
+        <table class="list">
+            <thead class="titles">
+                <th>Nom</th>
+                <th>Mot de passe</th>
+            </thead>
+            <tbody class="rows">
+                <tr *ngFor="let client of clients;" class="row">
+                    <td class = "item">{{client.name}}</td>
+                    <td class = "item">{{client.password}}</td>
+                    <td class = "item">{{client.isAdmin}}</td>
+                    <td><button class="delete_button">X</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

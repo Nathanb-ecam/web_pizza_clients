@@ -1,5 +1,46 @@
-<p>menu component </p>
-<h1>Pizza list</h1>
-<ul>
-    <li *ngFor="let pizza of pizzas">{{pizza.name}}</li>
-</ul>
+<div class="container">
+    <div class="pizzas" *ngIf="pizzas.length>0">
+        <h1>Nos pizzas</h1>
+        <div class="list">
+            <ul *ngFor="let pizza of pizzas">
+                <li class="item">{{pizza.name }}</li>
+                <li class="item">{{pizza.price}}</li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="chickens" *ngIf="chickens.length>0">
+        <h1>Nos poulets</h1>
+        <div class="list">
+            <ul *ngFor="let chicken of chickens">
+                <li class="item">{{chicken.name}}</li>
+                <li class="item">{{chicken.price}}</li>
+                <!-- <p>{{chicken.desc | notNull}}</p> -->
+            </ul>
+        </div>
+    </div>
+    <div class="drinks" *ngIf="drinks.length>0">
+        <h1>Nos boissons</h1>
+        <div class="list">
+            <ul *ngFor="let drink of drinks">
+                <li class="item">{{drink.name}}</li>
+                <li class="item">{{drink.price}}</li>
+                <!-- <p>{{drink.desc | notNull}}</p> -->
+            </ul>
+        </div>
+
+    </div>
+    <div class="sauces" *ngIf="sauces.length>0">
+        <h1>Nos sauces</h1>
+        <div class="list">
+            <ul *ngFor="let sauce of sauces">
+                <li class="item">{{sauce.name}}</li>
+                <li class="item">{{sauce.price}}</li>
+                <!-- <p>{{sauce.desc | notNull}}</p> -->
+            </ul>
+        </div>
+
+    </div>
+
+
+</div>
