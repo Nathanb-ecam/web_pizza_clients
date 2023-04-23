@@ -1,15 +1,7 @@
 import { Component } from '@angular/core';
 import { Product,RestaurantService } from '../restaurant.service';
-import { Pipe, PipeTransform } from '@angular/core';
 
 
-
-@Pipe({ name: 'notNull' })
-export class NotNullPipe implements PipeTransform {
-  transform(value: any, defaultValue: any = ''): any {
-    return value !== null ? value : defaultValue;
-  }
-}
 
 
 @Component({
@@ -22,6 +14,8 @@ export class MenuComponent {
   drinks:Product[]= [];
   chickens:Product[]= [];
   sauces:Product[]= [];
+
+  imageUrl:string="";
   constructor(private restauService : RestaurantService){
 
   }
@@ -38,6 +32,12 @@ export class MenuComponent {
   getPizzas(){
     this.restauService.getPizzas().subscribe(
       data => {
+        for (const pizza of data) {
+          if(pizza.image){
+            console.log("BLOB?"+ pizza.image)
+            // pizza.image = URL.createObjectURL(pizza.image);
+          }
+        }
         this.pizzas = data;
         console.log(this.pizzas);
       }

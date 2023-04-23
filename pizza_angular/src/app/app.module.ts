@@ -4,7 +4,7 @@ import { HttpClientModule } from "@angular/common/http"
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { MenuComponent, NotNullPipe } from './menu/menu.component';
+import { MenuComponent } from './menu/menu.component';
 import { PizzaComponent } from './pizza/pizza.component';
 import { AdminComponent } from './admin/admin.component';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +16,6 @@ import { FormsModule } from '@angular/forms';
     MenuComponent,
     PizzaComponent,
     AdminComponent,
-    NotNullPipe,
   ],
   imports: [
     BrowserModule,

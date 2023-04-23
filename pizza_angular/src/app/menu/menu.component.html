@@ -5,6 +5,8 @@
             <ul *ngFor="let pizza of pizzas">
                 <li class="item">{{pizza.name }}</li>
                 <li class="item">{{pizza.price}}</li>
+                <!-- <li class="item">{{pizza.image}}</li>I -->
+                <!-- <img src={{pizza.image}} alt=""> -->
             </ul>
         </div>
 
@@ -15,7 +17,7 @@
             <ul *ngFor="let chicken of chickens">
                 <li class="item">{{chicken.name}}</li>
                 <li class="item">{{chicken.price}}</li>
-                <!-- <p>{{chicken.desc | notNull}}</p> -->
+                <!-- <p>{{chicken.desc || "null"}}</p> -->
             </ul>
         </div>
     </div>
@@ -25,7 +27,7 @@
             <ul *ngFor="let drink of drinks">
                 <li class="item">{{drink.name}}</li>
                 <li class="item">{{drink.price}}</li>
-                <!-- <p>{{drink.desc | notNull}}</p> -->
+                <!-- <p>{{drink.desc || ""}}</p> -->
             </ul>
         </div>
 
@@ -36,7 +38,7 @@
             <ul *ngFor="let sauce of sauces">
                 <li class="item">{{sauce.name}}</li>
                 <li class="item">{{sauce.price}}</li>
-                <!-- <p>{{sauce.desc | notNull}}</p> -->
+                <!-- <p>{{sauce.desc || ""}}</p> -->
             </ul>
         </div>
 

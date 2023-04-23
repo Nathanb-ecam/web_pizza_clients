@@ -50,7 +50,7 @@ form button{
 Content if valid credentials
 */
 
-.content {
+.admin-content {
     display: flex;
     flex-direction:column;
     justify-content: center;
@@ -58,15 +58,15 @@ Content if valid credentials
     width: 100%;
 
 }
-.content h1{
+.admin-content h1{
     border-bottom: 2px solid gray;
     width: 100%;
 }
-.content div{
+.admin-content div{
     width: 80%;
 }
 
-.content div h2{
+.admin-content div h2{
     border-bottom: 1px solid black;
 }
 
