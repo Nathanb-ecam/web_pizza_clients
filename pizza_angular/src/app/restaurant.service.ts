@@ -9,6 +9,12 @@ export class Product{
   "desc":string;
 }
 
+export enum ProductType{
+  pizza,
+  drink,
+  chicken,
+  sauce
+}
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +26,7 @@ export class RestaurantService {
 
    }
 
-
+  // Pizza crud 
   getPizzas():Observable<any>{
     return this.http.get(this.base_url+"/pizzas")
   }

@@ -2,6 +2,9 @@ import { HttpClient,HttpHeaders, HttpParamsOptions } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { Product} from './restaurant.service';
+
+
 let httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
@@ -14,11 +17,6 @@ export class User{
   "password":string;
 }
 
-export class Product{
-  "name":string;
-  "price":number;
-  "desc":string;
-}
 
 
 export class Menu{
@@ -53,6 +51,7 @@ export class Token{
 }
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -67,12 +66,7 @@ export class AdminService {
     return this.http.post<Token>(this.base_url+"/login",user);
   }
 
-  getPizzas():Observable<Product>{
-    return this.http.get<Product>(this.base_url+"/pizzas")
-  }
-  getDrinks():Observable<Product>{
-    return this.http.get<Product>(this.base_url+"/drinks")
-  }
+
   getMenus():Observable<any>{
     return this.http.get<Menu>(this.base_url+"/menus")
   }

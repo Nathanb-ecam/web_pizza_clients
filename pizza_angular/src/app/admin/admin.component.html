@@ -15,8 +15,10 @@
 
 <p>token : {{token.token}}</p>
 <p>isAdmin :  {{isAdmin}}</p>
-<div class="admin-content" *ngIf="signedIn">
+<div class="content" *ngIf="signedIn">
     <h1>Admin dashboard</h1>
+
+
     <div class="menus" *ngIf="menus.length>0">
         <h2>Gestion des Menus</h2>
         <table class="list">
@@ -30,16 +32,101 @@
             <tbody class="rows">
                 <tr *ngFor="let menu of menus;" class="row">
                     <td class = "item">{{menu.menu_id}}</td>
-                    <td class = "item">{{menu.idSauce}}</td>
-                    <td class = "item">{{menu.idChicken}}</td>
-                    <td class = "item">{{menu.idPizza}}</td>
-                    <td class = "item">{{menu.idDrink}}</td>
+                    <td class = "item">{{(pizzas.id===15).name}}</td>
+                    <td class = "item">{{pizzas[1].name}}</td>
+                    <td class = "item">{{pizzas[1].name}}</td>
+                    <td class = "item">{{pizzas[1].name}}</td>
                     <td><button class="delete_button">X</button></td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div class="orderextras" *ngIf="orderextras.length>0">
+
+    <div class="pizzas" *ngIf="pizzas.length>0">
+        <h2>Gestion des Pizzas</h2>
+        <table class="list">
+            <thead class="titles">
+                <th>id</th>
+                <th>nom</th>
+                <th>prix</th>
+                <th>description</th>
+            </thead>
+            <tbody class="rows">
+                <tr *ngFor="let pizza of pizzas;" class="row">
+                    <td class = "item">{{pizza.id}}</td>
+                    <td class = "item">{{pizza.name}}</td>
+                    <td class = "item">{{pizza.price}}</td>
+                    <td class = "item">{{pizza.desc}}</td>
+                    <td><button class="delete_button">X</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="drinks" *ngIf="drinks.length>0">
+        <h2>Gestion des Boissons</h2>
+        <table class="list">
+            <thead class="titles">
+                <th>id</th>
+                <th>nom</th>
+                <th>prix</th>
+                <th>description</th>
+            </thead>
+            <tbody class="rows">
+                <tr *ngFor="let drink of drinks;" class="row">
+                    <td class = "item">{{drink.id}}</td>
+                    <td class = "item">{{drink.name}}</td>
+                    <td class = "item">{{drink.price}}</td>
+                    <td class = "item">{{drink.desc}}</td>
+                    <td><button class="delete_button">X</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="sauces" *ngIf="sauces.length>0">
+        <h2>Gestion des Sauces</h2>
+        <table class="list">
+            <thead class="titles">
+                <th>id</th>
+                <th>nom</th>
+                <th>prix</th>
+                <th>description</th>
+            </thead>
+            <tbody class="rows">
+                <tr *ngFor="let sauce of sauces;" class="row">
+                    <td class = "item">{{sauce.id}}</td>
+                    <td class = "item">{{sauce.name}}</td>
+                    <td class = "item">{{sauce.price}}</td>
+                    <td class = "item">{{sauce.desc}}</td>
+                    <td><button class="delete_button">X</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="chickens" *ngIf="chickens.length>0">
+        <h2>Gestion des Poulets</h2>
+        <table class="list">
+            <thead class="titles">
+                <th>id</th>
+                <th>nom</th>
+                <th>prix</th>
+                <th>description</th>
+            </thead>
+            <tbody class="rows">
+                <tr *ngFor="let chicken of chickens;" class="row">
+                    <td class = "item">{{chicken.id}}</td>
+                    <td class = "item">{{chicken.name}}</td>
+                    <td class = "item">{{chicken.price}}</td>
+                    <td class = "item">{{chicken.desc}}</td>
+                    <td><button class="delete_button">X</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="orderextras" *ngIf="orderextras.length>0" hidden>
         <h2>Gestion des Suppléments</h2>
         <table class="list">
             <thead class="titles">
@@ -63,7 +150,7 @@
             </tbody>
         </table>
     </div>
-    <div class="clients" *ngIf="clients.length>0">
+    <div class="clients" *ngIf="clients.length>0" hidden>
         <h2>Gestion des Clients</h2>
         <table class="list">
             <thead class="titles">
@@ -83,23 +170,4 @@
 </div>
 
 
-<!-- <div class="form" *ngIf="signedIn">
-    <form class="create-pizza">
-        <h2>Ajouter une pizza</h2>
-        <div>
-            <input type="text" id="pizza_name" name="name" [(ngModel)]="pizza_name" placeholder="Nom" required>
-            <input type="number" id="pizza_price" name="password" [(ngModel)]="pizza_price" placeholder="Prix"required>
-        </div>
-        <input type="file" class="file-input" (change)="addPizza($event)" #fileUpload required>
-        <button>Valider</button>
-        {{fileName || "No file uploaded yet."}}
-        <div class="file-upload">
-            
-
-            <button mat-mini-fab color="primary" class="upload-btn"(click)="fileUpload.click()">
-            <mat-icon>attach_file</mat-icon>
-            </button>
-        </div>
-    </form>
-</div> -->
 
