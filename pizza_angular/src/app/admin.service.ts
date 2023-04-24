@@ -27,6 +27,14 @@ export class Menu{
   "idDrink":number;
 }
 
+export class MenuExplicit{
+  "menu_id":number;
+  "Pizza":Product;
+  "Drink":Product;
+  "Sauce":Product;
+  "Chicken":Product;
+}
+
 export class OrderExtra{
   "idOrderExtra":number;
   "idOrder":number;
@@ -57,27 +65,28 @@ export class Token{
 })
 export class AdminService {
   base_url ="http://pat.infolab.ecam.be:60836/api"
+  local_url ="http://localhost:80/api"
 
   constructor(private http :HttpClient) { 
 
   }
 
   login(user: User): Observable<Token> {
-    return this.http.post<Token>(this.base_url+"/login",user);
+    return this.http.post<Token>(this.local_url+"/login",user);
   }
 
-
-  getMenus():Observable<any>{
-    return this.http.get<Menu>(this.base_url+"/menus")
+  getMenusExplicit(token:string):Observable<any>{
+    let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
+    return this.http.get<MenuExplicit>(this.local_url+"/menusExplicit",{headers:headers})
   }
   getClients(token:string):Observable<any>{
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
-    return this.http.get(this.base_url+"/users",{headers:headers})
+    return this.http.get(this.local_url+"/users",{headers:headers})
   }
 
   getOrderExtras(token:string):Observable<any>{
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
-    return this.http.get<OrderExtra>(this.base_url+"/orderextras",{headers:headers})
+    return this.http.get<OrderExtra>(this.local_url+"/orderextras",{headers:headers})
   }
 
 }

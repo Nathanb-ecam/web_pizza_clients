@@ -21,6 +21,8 @@ export enum ProductType{
 })
 export class RestaurantService {
   base_url = "http://pat.infolab.ecam.be:60836/api"
+  local_url ="http://localhost:80/api"
+
 
   constructor(private http : HttpClient) {
 
@@ -28,19 +30,19 @@ export class RestaurantService {
 
   // Pizza crud 
   getPizzas():Observable<any>{
-    return this.http.get(this.base_url+"/pizzas")
+    return this.http.get(this.local_url+"/pizzas")
   }
 
   getDrinks():Observable<any>{
-    return this.http.get(this.base_url+"/drinks")
+    return this.http.get(this.local_url+"/drinks")
   }
   getChickens():Observable<any>{
-    return this.http.get(this.base_url+"/chickens")
+    return this.http.get(this.local_url+"/chickens")
   }
   getExtras():Observable<any>{
-    return this.http.get(this.base_url+"/extras")
+    return this.http.get(this.local_url+"/extras")
   }
   getSauces():Observable<any>{
-    return this.http.get(this.base_url+"/sauces")
+    return this.http.get(this.local_url+"/sauces")
   }
 }

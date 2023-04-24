@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AdminService } from '../admin.service';
+import { AdminService, MenuExplicit } from '../admin.service';
 import { Menu,OrderExtra,Client,User,Token } from '../admin.service';
 import { Product,ProductType} from '../restaurant.service';
 import { RestaurantService } from '../restaurant.service';
@@ -19,10 +19,12 @@ export class AdminComponent {
   chickens:Product[]=[]
   sauces:Product[]=[]
   drinks:Product[]=[]
-  menus:Menu[]=[]
+  menus:MenuExplicit[]=[]
   orderextras:OrderExtra[]=[]
   clients:Client[]=[]
 
+
+  pizzaName:string="";
 
   token:Token=new Token()
   isAdmin:boolean=false;
@@ -52,25 +54,32 @@ export class AdminComponent {
   }
 
   showAllTables(){
-    this.showMenusTable()
     this.showOrderExtrasTable()
     this.showClientsTable()
     this.showPizzaTable()
-    // this.showSauceTable()
-    // this.showDrinkTable()
-    // this.showChickenTable()
+    this.showMenusExplicitTable()
+    this.showSauceTable()
+    this.showDrinkTable()
+    this.showChickenTable()
 
   }
 
 
-  showMenusTable(){
-    this.adminService.getMenus().subscribe(
+  showMenusExplicitTable(){
+    console.log("Explicit menus");
+    this.adminService.getMenusExplicit(this.token.token).subscribe(
       data => {
         this.menus = data;
-        // console.log(this.menus);
+        console.log("this.menus");
+        console.log(this.menus);
       }
     )
   }
+
+  updateMenuRow(){
+    console.log()
+  }
+
   showClientsTable(){
     this.adminService.getClients(this.token.token).subscribe(
       data => {
@@ -94,63 +103,41 @@ export class AdminComponent {
     this.restauService.getPizzas().subscribe(
       data => {
         this.pizzas= data;
-        console.log("Pizza");
-        console.log(this.pizzas);
+        // console.log("Pizza");
+        // console.log(this.pizzas);
       }
     )
   }
 
-  corresponding_item(id:number,type:string){
-    console.log("corrsponding ...");
-    console.log(id,type)
-    // let item:Product;
-    switch(type){
-      case "pizza":
-        return this.pizzas.find(pizza=>pizza.id===id);
-        break;
-      case "chicken":
-        return this.chickens.find(chicken=>chicken.id===id);
-        break;
-      case "drink":
-        return this.drinks.find(drink=>drink.id===id);
-        break;
-      case "sauce":
-        return this.sauces.find(sauce=>sauce.id===id);
-        break;
-      default:
-        console.log("Not found");
-        return
-        break;
-    }
-  }
 
-  // showDrinkTable(){
-  //   this.restauService.getDrinks().subscribe(
-  //     data => {
-  //       this.drinks= data;
-  //       console.log("Drink");
-  //       console.log(this.drinks);
-  //     }
-  //   )
-  // }
-  // showChickenTable(){
-  //   this.restauService.getChickens().subscribe(
-  //     data => {
-  //       this.chickens= data;
-  //       console.log("Chicken");
-  //       console.log(this.chickens);
-  //     }
-  //   )
-  // }
-  // showSauceTable(){
-  //   this.restauService.getSauces().subscribe(
-  //     data => {
-  //       this.sauces= data;
-  //       console.log("Sauce");
-  //       console.log(this.sauces);
-  //     }
-  //   )
-  // }
+
+  showDrinkTable(){
+    this.restauService.getDrinks().subscribe(
+      data => {
+        this.drinks= data;
+        console.log("Drink");
+        console.log(this.drinks);
+      }
+    )
+  }
+  showChickenTable(){
+    this.restauService.getChickens().subscribe(
+      data => {
+        this.chickens= data;
+        console.log("Chicken");
+        console.log(this.chickens);
+      }
+    )
+  }
+  showSauceTable(){
+    this.restauService.getSauces().subscribe(
+      data => {
+        this.sauces= data;
+        console.log("Sauce");
+        console.log(this.sauces);
+      }
+    )
+  }
 
 
 

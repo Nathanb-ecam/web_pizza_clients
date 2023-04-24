@@ -9,8 +9,16 @@
     </form>
 </div>
 
+<select>
+    <option value="" disabled selected>{{"Choisie"}}</option>
+    <div *ngFor="let pizza of pizzas">
+        <option  *ngIf="pizza.name!='Hawai'" [value]="pizza.name">
+            {{pizza.name}}
+        <!-- <input type="text" id="pizzaName" name="pizzaName" [(ngModel)]="pizzaName" required>   -->
+        </option>
+    </div>
 
-
+</select>
 
 
 <p>token : {{token.token}}</p>
@@ -24,18 +32,53 @@
         <table class="list">
             <thead class="titles">
                 <th>Menu_id</th>
-                <th>idSauce</th>
-                <th>idChicken</th>
-                <th>idPizza</th>
-                <th>idDrink</th>
+                <th>Pizza</th>
+                <th>Chicken</th>
+                <th>Drink</th>
+                <th>Sauce</th>
             </thead>
             <tbody class="rows">
                 <tr *ngFor="let menu of menus;" class="row">
-                    <td class = "item">{{menu.menu_id}}</td>
-                    <td class = "item">{{(pizzas.id===15).name}}</td>
-                    <td class = "item">{{pizzas[1].name}}</td>
-                    <td class = "item">{{pizzas[1].name}}</td>
-                    <td class = "item">{{pizzas[1].name}}</td>
+                    <!-- <form (ngSubmit)="updateMenuRow()"> -->
+                        <td class = "item">{{menu.menu_id}}</td>
+                        <td class = "item">
+                            <select>
+                                <option value="" disabled selected>{{menu.Pizza.name}}</option>
+                                <option *ngFor="let pizza of pizzas" [value]="pizza.name">
+                                    {{pizza.name}}
+                                    <!-- <input type="text" id="pizzaName" name="pizzaName" [(ngModel)]="pizzaName" required>   -->
+                                </option>
+                            </select>
+                        </td>
+                        <td class = "item">
+                            <select>
+                                <option value="" disabled selected>{{menu.Chicken.name}}</option>
+                                <option *ngFor="let chicken of chickens" [value]="chicken.name">
+                                    {{chicken.name}}
+                                    <!-- <input type="text" id="pizzaName" name="pizzaName" [(ngModel)]="pizzaName" required>   -->
+                                </option>
+                            </select>
+                        </td>
+                        <td class = "item">
+                            <select>
+                                <option value="" disabled selected>{{menu.Drink.name}}</option>
+                                <option *ngFor="let drink of drinks" [value]="drink.name">
+                                    {{drink.name}}
+                                    <!-- <input type="text" id="pizzaName" name="pizzaName" [(ngModel)]="pizzaName" required>   -->
+                                </option>
+                            </select>
+                        </td>
+                        <td class = "item">
+                            <select>
+                                <option value="" disabled selected>{{menu.Sauce.name}}</option>
+                                <option *ngFor="let sauce of sauces" [value]="sauce.name">
+                                    {{menu.Sauce.name}}
+                                    <!-- <input type="text" id="pizzaName" name="pizzaName" [(ngModel)]="pizzaName" required>   -->
+                                </option>
+                            </select>
+                        </td>
+                        <input type="submit" value="Modifier">
+                    <!-- </form> -->
                     <td><button class="delete_button">X</button></td>
                 </tr>
             </tbody>
@@ -150,7 +193,7 @@
             </tbody>
         </table>
     </div>
-    <div class="clients" *ngIf="clients.length>0" hidden>
+    <div class="clients" *ngIf="clients.length>0">
         <h2>Gestion des Clients</h2>
         <table class="list">
             <thead class="titles">
