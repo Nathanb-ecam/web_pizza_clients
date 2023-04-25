@@ -3,6 +3,7 @@ import { AdminService, MenuExplicit } from '../admin.service';
 import { Menu,OrderExtra,Client,User,Token } from '../admin.service';
 import { Product,ProductType} from '../restaurant.service';
 import { RestaurantService } from '../restaurant.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
@@ -11,6 +12,9 @@ import { RestaurantService } from '../restaurant.service';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
+  columnsToDisplay:string[] = ['menu_id', 'Pizza','Drink','Sauce','Chicken','action'];
+  menuDataSource:any;
+
   name:string="";
   password:string="";
 
@@ -35,12 +39,13 @@ export class AdminComponent {
   }
   
   ngOnInit(){
-    
+    this.login()
     
   }
 
   login(){
-    let user:User = {"name":this.name,"password":this.password}
+    // let user:User = {"name":this.name,"password":this.password}
+    let user:User = {"name":"Nath","password":"1234"}
     this.adminService.login(user).subscribe(
       data => {
         this.token = data;
@@ -54,13 +59,13 @@ export class AdminComponent {
   }
 
   showAllTables(){
-    this.showOrderExtrasTable()
-    this.showClientsTable()
-    this.showPizzaTable()
+    // this.showOrderExtrasTable()
+    // this.showClientsTable()
+    // this.showPizzaTable()
     this.showMenusExplicitTable()
-    this.showSauceTable()
-    this.showDrinkTable()
-    this.showChickenTable()
+    // this.showSauceTable()
+    // this.showDrinkTable()
+    // this.showChickenTable()
 
   }
 
@@ -69,7 +74,8 @@ export class AdminComponent {
     console.log("Explicit menus");
     this.adminService.getMenusExplicit(this.token.token).subscribe(
       data => {
-        this.menus = data;
+        // this.menus = data;
+        this.menuDataSource = new MatTableDataSource(data)
         console.log("this.menus");
         console.log(this.menus);
       }

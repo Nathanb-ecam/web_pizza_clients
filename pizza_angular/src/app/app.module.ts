@@ -8,6 +8,11 @@ import { MenuComponent } from './menu/menu.component';
 import { PizzaComponent } from './pizza/pizza.component';
 import { AdminComponent } from './admin/admin.component';
 import { FormsModule } from '@angular/forms';
+import { FormAdminComponent } from './form-admin/form-admin.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -16,12 +21,18 @@ import { FormsModule } from '@angular/forms';
     MenuComponent,
     PizzaComponent,
     AdminComponent,
+    FormAdminComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatTableModule,
+    MatIconModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
