@@ -1,11 +1,11 @@
 import { Component,Inject } from '@angular/core';
 import { AdminService, MenuExplicit } from '../admin.service';
-import { Menu,OrderExtra,Client,User,Token } from '../admin.service';
+import { MenuEntity,OrderExtra,Client,User,Token } from '../admin.service';
 import { Product,ProductType} from '../restaurant.service';
 import { RestaurantService } from '../restaurant.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog,MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormAdminComponent } from '../form-admin/form-admin.component';
+import { MenuEditComponent } from '../menu-edit/menu-edit.component';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class AdminComponent {
   columnsToDisplay:string[] = ['menu_id', 'Pizza','Drink','Sauce','Chicken','action'];
   menuDataSource:any;
 
-  name:string="";
+  username:string="";
   password:string="";
 
 
@@ -47,14 +47,15 @@ export class AdminComponent {
 
   ngOnInit(){
 
-    
+    this.login()
   }
 
 
-  openDialog() {
-    this.dialog.open(FormAdminComponent, {
+  openDialog(menu:MenuExplicit) {
+    this.dialog.open(MenuEditComponent, {
       data: {
-        animal: 'panda',
+        menu: menu,
+
       },
     });
   }
@@ -74,6 +75,25 @@ export class AdminComponent {
     )
   }
 
+  addMenu(){
+    this.dialog.open(MenuEditComponent, {
+      data: {
+        menu:null,
+        token:this.token,
+
+      },
+    });
+  }
+
+  deleteMenu(id:number){
+    console.log('need to delete menu n°',id);
+    this.adminService.deleteMenu(id,this.token.token).subscribe(
+      data=>{
+        console.log(`Deleted menu with id ${id}`);
+        console.log("Request result",data);
+      }
+    )
+  }
   showAllTables(){
     // this.showOrderExtrasTable()
     // this.showClientsTable()
@@ -156,6 +176,7 @@ export class AdminComponent {
       data => {
         this.sauces= data;
         console.log("Sauce");
+
         console.log(this.sauces);
       }
     )

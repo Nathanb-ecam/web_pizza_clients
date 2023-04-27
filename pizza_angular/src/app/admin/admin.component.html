@@ -1,16 +1,21 @@
-<div class="form" *ngIf="!signedIn">
-    <app-signin-form></app-signin-form>
-
-</div>
+    
+    <div class="signin-form" *ngIf="!signedIn">
+        <form (ngSubmit)="login()" class="signin-form">
+            <app-signin-card></app-signin-card>
+        </form>
+    </div>
 
 
 
 <p>token : {{token.token}}</p>
 <p>isAdmin :  {{isAdmin}}</p>
 
-<div class="content" *ngIf="signedIn">
-    <h1>Admin dashboard</h1>
-
+<div class="menu-content" *ngIf="signedIn">
+    <div class="menu-title">
+        <h1>Admin dashboard</h1>
+        <button mat-flat-button (click)="addMenu()" color="primary">Add a menu</button>    
+    </div>
+    
     <table mat-table [dataSource]="menuDataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="menu_id">
             <th mat-header-cell *matHeaderCellDef> Menu_id </th>
@@ -35,10 +40,10 @@
         <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> Action </th>
             <td mat-cell *matCellDef="let menu"> 
-                <button mat-icon-button color="Primary" (click)="openDialog()">
+                <button mat-icon-button color="Primary" (click)="openDialog(menu)">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-icon-button color="warn">
+                <button mat-icon-button color="warn" (click)="deleteMenu(menu.menu_id)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </td>

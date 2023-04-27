@@ -9,6 +9,14 @@ export class Product{
   "desc":string;
 }
 
+export class Menu{
+  "idSauce":number;
+  "idChicken":number;
+  "idPizza":number;
+  "idDrink":number;
+
+}
+
 export enum ProductType{
   pizza,
   drink,
@@ -45,4 +53,11 @@ export class RestaurantService {
   getSauces():Observable<any>{
     return this.http.get(this.local_url+"/sauces")
   }
+
+  addMenu(menu:Menu):Observable<any>{
+    return this.http.post(this.local_url+"/menus",menu);
+  }
+
+
+
 }
