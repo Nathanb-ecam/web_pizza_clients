@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component,Inject } from '@angular/core';
 import { AdminService, MenuExplicit } from '../admin.service';
 import { Menu,OrderExtra,Client,User,Token } from '../admin.service';
 import { Product,ProductType} from '../restaurant.service';
 import { RestaurantService } from '../restaurant.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog,MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormAdminComponent } from '../form-admin/form-admin.component';
 
 
 @Component({
@@ -34,13 +36,27 @@ export class AdminComponent {
   isAdmin:boolean=false;
   signedIn:Boolean=false
 
-  constructor(private adminService : AdminService,private restauService : RestaurantService){
-
-  }
+  constructor(
+    private adminService : AdminService,
+    private restauService : RestaurantService,
+    public dialog: MatDialog
+    ){}
   
+
+
+
   ngOnInit(){
-    this.login()
+
     
+  }
+
+
+  openDialog() {
+    this.dialog.open(FormAdminComponent, {
+      data: {
+        animal: 'panda',
+      },
+    });
   }
 
   login(){

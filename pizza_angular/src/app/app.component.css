@@ -1,20 +1,9 @@
-.header{
-    height: 20px;
-    background: #a28080;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem;
+
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+
 }
-
-.header nav{
-    display: flex;
-    justify-content: space-evenly;}
-
-.header nav a{
-    text-decoration: none;
-    color: white;
-    padding: 0.3rem;
-
+mat-toolbar button{
+  margin: 0.2rem;
 }

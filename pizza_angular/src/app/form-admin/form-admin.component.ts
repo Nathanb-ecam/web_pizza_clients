@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Menu } from '../admin.service';
 
 @Component({
   selector: 'app-form-admin',
@@ -6,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./form-admin.component.css']
 })
 export class FormAdminComponent {
+  constructor(@Inject(MAT_DIALOG_DATA) public menu: Menu){
 
+  }
 }

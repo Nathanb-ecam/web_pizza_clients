@@ -1,10 +1,19 @@
-<div class="header">
-  <p>Restaurant</p>
-  <nav>
-    <button mat-raised-button routerLink="/menu">Menu</button>
-    <button mat-raised-button routerLink="/login">Admin</button>
-  </nav>
-</div>
+
+<mat-toolbar color="primary">
+  <div class="projectname">
+    My App
+  </div>
+  <div class="navbuttons">
+    <button mat-raised-button routerLink="/menu">
+      MENU
+    </button>
+    <button mat-raised-button routerLink="/admin">
+      ADMIN
+    </button>
+  </div>
+</mat-toolbar>
+
+
 
 
 <router-outlet></router-outlet>

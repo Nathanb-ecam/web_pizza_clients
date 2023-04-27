@@ -9,7 +9,7 @@ const routes: Routes = [
   // {path:"home",component:HomeComponent},
   {path:"menu",component:MenuComponent},
   {path:"pizza",component:PizzaComponent},
-  {path:"login",component:AdminComponent},
+  {path:"admin",component:AdminComponent},
 ];
 
 @NgModule({
