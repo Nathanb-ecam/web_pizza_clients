@@ -55,6 +55,7 @@ export class AdminComponent {
     this.dialog.open(MenuEditComponent, {
       data: {
         menu: menu,
+        token:this.token,
 
       },
     });

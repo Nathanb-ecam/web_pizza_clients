@@ -3,25 +3,25 @@
         <!-- <mat-card> -->
             <mat-label>Menu n°{{currentselection.menu_id}}</mat-label>
             <mat-form-field appearance="fill">
-                <mat-label>{{selectedPizza}}</mat-label>
+                <mat-label>{{selectedPizza.name}}</mat-label>
                 <mat-select matNativeControl  [(ngModel)]="selectedPizza" name="pizza">
                     <mat-option *ngFor="let p of pizzas"  [value]="p.name" >{{ p.name }}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="fill">
-                <mat-label>{{selectedChicken}}</mat-label>
+                <mat-label>{{selectedChicken.name}}</mat-label>
                 <mat-select matNativeControl [(ngModel)]="selectedChicken" name="chicken">
                     <mat-option *ngFor="let p of chickens" [value]="p.name" >{{ p.name }}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="fill">
-                <mat-label>{{selectedDrink}}</mat-label>
+                <mat-label>{{selectedDrink.name}}</mat-label>
                 <mat-select  matNativeControl [(ngModel)]="selectedDrink" name="drink">
                     <mat-option *ngFor="let p of drinks" [value]="p.name" >{{ p.name }}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="fill">
-                <mat-label>{{selectedDrink}}</mat-label>
+                <mat-label>{{selectedSauce.name}}</mat-label>
                 <mat-select  matNativeControl [(ngModel)]="selectedSauce" name="sauce">
                     <mat-option *ngFor="let p of sauces" [value]="p.name">{{ p.name }}</mat-option>
                 </mat-select>
@@ -43,30 +43,30 @@
             <mat-form-field appearance="fill">
                 <mat-label>Pizza</mat-label>
                 <mat-select matNativeControl  [(ngModel)]="selectedPizza" name="pizza"  required>
-                    <mat-option *ngFor="let p of pizzas"  [value]="p.name" >{{ p.name }}</mat-option>
+                    <mat-option *ngFor="let p of pizzas"  [value]="p" >{{ p.name }}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Chicken</mat-label>
                 <mat-select matNativeControl [(ngModel)]="selectedChicken" name="chicken" required>
-                    <mat-option *ngFor="let p of chickens" [value]="p.name" >{{ p.name }}</mat-option>
+                    <mat-option *ngFor="let p of chickens" [value]="p" >{{ p.name }}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Boisson</mat-label>
                 <mat-select  matNativeControl [(ngModel)]="selectedDrink" name="drink" required>
-                    <mat-option *ngFor="let p of drinks" [value]="p.name" >{{ p.name }}</mat-option>
+                    <mat-option *ngFor="let p of drinks" [value]="p" >{{ p.name }}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Sauce</mat-label>
                 <mat-select  matNativeControl [(ngModel)]="selectedSauce" name="sauce" required>
-                    <mat-option *ngFor="let p of sauces" [value]="p.name">{{ p.name }}</mat-option>
+                    <mat-option *ngFor="let p of sauces" [value]="p">{{ p.name }}</mat-option>
                 </mat-select>
             </mat-form-field>
             <div class="buttons">
                 <button mat-raised-button (click)="cancel()">Annuler</button>
-                <button mat-flat-button type="submit" color="primary">Modifier</button>
+                <button mat-flat-button type="submit" color="primary">Ajouter</button>
             </div>
             
         <!-- </mat-card> -->
