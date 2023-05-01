@@ -52,13 +52,17 @@ export class AdminComponent {
 
 
   openDialog(menu:MenuExplicit) {
-    this.dialog.open(MenuEditComponent, {
+    const dialogRef = this.dialog.open(MenuEditComponent, {
       data: {
         menu: menu,
         token:this.token,
 
       },
     });
+    dialogRef.afterClosed().subscribe(result => {
+      this.showMenusExplicitTable()
+    });
+
   }
 
   login(){
@@ -77,12 +81,15 @@ export class AdminComponent {
   }
 
   addMenu(){
-    this.dialog.open(MenuEditComponent, {
+    const dialogRef = this.dialog.open(MenuEditComponent, {
       data: {
         menu:null,
         token:this.token,
 
       },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.showMenusExplicitTable()
     });
   }
 
@@ -92,8 +99,10 @@ export class AdminComponent {
       data=>{
         console.log(`Deleted menu with id ${id}`);
         console.log("Request result",data);
+        this.showMenusExplicitTable()
       }
     )
+    
   }
   showAllTables(){
     // this.showOrderExtrasTable()

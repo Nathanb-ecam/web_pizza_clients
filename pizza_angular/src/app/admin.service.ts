@@ -87,6 +87,10 @@ export class AdminService {
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
     return this.http.post(this.local_url+`/menus`,menu,{headers:headers})
   }
+  modifyMenu(menu:Menu,id:number,token:string){
+    let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
+    return this.http.put(this.local_url+`/menu/${id}`,menu,{headers:headers})
+  }
   deleteMenu(id:number,token:string){
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
     return this.http.delete(this.local_url+`/menu/${id}`,{headers:headers})

@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Menu, Product, RestaurantService } from '../restaurant.service';
-import { AdminService, MenuExplicit } from '../admin.service';
+import { AdminService, MenuExplicit, Token } from '../admin.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -10,7 +10,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./menu-edit.component.css']
 })
 export class MenuEditComponent {
-  token:string='';
+  token:Token=new Token;
 
 
   // selectedChicken:string=''
@@ -20,10 +20,10 @@ export class MenuEditComponent {
   sauces:Product[]=[];
 
   currentselection:any;
-  selectedPizza:any;
-  selectedChicken:any;
-  selectedSauce:any;
-  selectedDrink:any;
+  selectedPizza: Product = new Product;
+  selectedChicken:Product = new Product;
+  selectedSauce:Product = new Product;
+  selectedDrink:Product = new Product;
 
   constructor(
       @Inject(MAT_DIALOG_DATA) public data: any,
@@ -63,11 +63,12 @@ export class MenuEditComponent {
       console.log("Trying to add a menu")
       console.log("with token : ",this.token)
       console.log("Menu to add :",menu)
-      this.adminService.addMenu(menu,this.token).subscribe(
+      this.adminService.addMenu(menu,this.token.token).subscribe(
         data=>{
           console.log(data);
         }
       )
+      this._dialogRef.close()
     }
     else{
       console.log("All fields need to be filled to add a menu")
@@ -81,11 +82,14 @@ export class MenuEditComponent {
     console.log(this.selectedDrink)
     console.log(this.selectedPizza)
     console.log(this.selectedSauce)
-    // const menu:Menu = {"idPizza":0,"idChicken":0,"idDrink":0,"idSauce":0}
-    // this.restauService.addMenu(menu).subscribe({
-      
-    // })
 
+    const menu:Menu = {"idPizza":this.selectedPizza.id,"idChicken":this.selectedChicken.id,"idDrink":this.selectedDrink.id,"idSauce":this.selectedSauce.id}
+    this.adminService.modifyMenu(menu,this.currentselection.menu_id,this.token.token).subscribe(
+      data=>{
+        console.log(data);
+      }
+    )
+    this._dialogRef.close()
   }
 
 
