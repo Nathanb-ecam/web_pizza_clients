@@ -58,6 +58,7 @@ export class Token{
   "token":string;
   "maxAge":number;
   "isAdmin":boolean;
+  "user_id":number;
 }
 
 
