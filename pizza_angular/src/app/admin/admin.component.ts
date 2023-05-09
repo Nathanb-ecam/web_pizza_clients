@@ -14,8 +14,11 @@ import { MenuEditComponent } from '../menu-edit/menu-edit.component';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
-  columnsToDisplay:string[] = ['menu_id', 'Pizza','Drink','Sauce','Chicken','action'];
+  menuColumnsToDisplay:string[] = ['menu_id', 'Pizza','Drink','Sauce','Chicken','action'];
+  clientColumnsToDisplay:string[] = ['Client_id', 'Name','Password','isAdmin','Points'];
   menuDataSource:any;
+  clientDataSource:any;
+
 
   username:string="";
   password:string="";
@@ -106,7 +109,7 @@ export class AdminComponent {
   }
   showAllTables(){
     // this.showOrderExtrasTable()
-    // this.showClientsTable()
+    this.showClientsTable()
     // this.showPizzaTable()
     this.showMenusExplicitTable()
     // this.showSauceTable()
@@ -121,9 +124,9 @@ export class AdminComponent {
     this.adminService.getMenusExplicit(this.token.token).subscribe(
       data => {
         // this.menus = data;
-        this.menuDataSource = new MatTableDataSource(data)
-        console.log("this.menus");
-        console.log(this.menus);
+        this.menuDataSource = new MatTableDataSource(data);
+        console.log("this.menus DataSource");
+        console.log(data);
       }
     )
   }
@@ -132,11 +135,18 @@ export class AdminComponent {
     console.log()
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.clientDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  
   showClientsTable(){
     this.adminService.getClients(this.token.token).subscribe(
       data => {
         this.clients = data;
-        // console.log(this.clients);
+        this.clientDataSource = new MatTableDataSource(data);
+        console.log(this.clients);
       }
     )
   }
@@ -151,6 +161,12 @@ export class AdminComponent {
   }
 
 
+
+
+
+
+
+
   showPizzaTable(){
     this.restauService.getPizzas().subscribe(
       data => {
@@ -160,8 +176,6 @@ export class AdminComponent {
       }
     )
   }
-
-
 
   showDrinkTable(){
     this.restauService.getDrinks().subscribe(

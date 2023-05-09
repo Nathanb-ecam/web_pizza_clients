@@ -80,9 +80,9 @@ export class AdminService {
 
 
   // MENU SECTION 
-  getMenusExplicit(token:string):Observable<any>{
+  getMenusExplicit(token:string):Observable<MenuExplicit[]>{
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
-    return this.http.get<MenuExplicit>(this.local_url+"/menusExplicit",{headers:headers})
+    return this.http.get<MenuExplicit[]>(this.local_url+"/menusExplicit",{headers:headers})
   }
   addMenu(menu:Menu,token:string){
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
@@ -99,9 +99,9 @@ export class AdminService {
 
 
 
-  getClients(token:string):Observable<any>{
+  getClients(token:string):Observable<Client[]>{
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
-    return this.http.get(this.local_url+"/users",{headers:headers})
+    return this.http.get<Client[]>(this.local_url+"/users",{headers:headers})
   }
 
   getOrderExtras(token:string):Observable<any>{
