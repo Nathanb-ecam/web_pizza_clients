@@ -15,6 +15,12 @@ export class MenuComponent {
   chickens:Product[]= [];
   sauces:Product[]= [];
 
+
+  selectedPizza:Product=new Product;
+  selectedDrink:Product=new Product;
+  selectedChicken:Product=new Product;
+  selectedSauce:Product=new Product;
+
   imageUrl:string="";
   constructor(private restauService : RestaurantService){
 
@@ -32,12 +38,6 @@ export class MenuComponent {
   getPizzas(){
     this.restauService.getPizzas().subscribe(
       data => {
-        for (const pizza of data) {
-          if(pizza.image){
-            console.log("BLOB?"+ pizza.image)
-            // pizza.image = URL.createObjectURL(pizza.image);
-          }
-        }
         this.pizzas = data;
         console.log(this.pizzas);
       }

@@ -1,48 +1,45 @@
-<div class="container">
-    <div class="pizzas" *ngIf="pizzas.length>0">
-        <h1>Nos pizzas</h1>
-        <div class="list">
-            <ul *ngFor="let pizza of pizzas">
-                <li class="item">{{pizza.name }}</li>
-                <li class="item">{{pizza.price}}</li>
-                <!-- <li class="item">{{pizza.image}}</li>I -->
-                <!-- <img src={{pizza.image}} alt=""> -->
-            </ul>
-        </div>
+<form>
+    <div class="menu">
+    <h2>Select your pizza</h2>
+    <mat-form-field appearance="fill">
+      <mat-label>Favorite pizza</mat-label>
+      <mat-select [(ngModel)]="selectedPizza" name="pizza">
+        <mat-option *ngFor="let pizza of pizzas" [value]="pizza">
+          {{pizza.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>   
+    <p> Pizza description: {{selectedPizza.desc}} </p>
+    
+    <h2>Select your drink</h2>
+    <mat-form-field appearance="fill">
+      <mat-label>Favorite drink</mat-label>
+      <mat-select [(ngModel)]="selectedDrink" name="drink">
+        <mat-option *ngFor="let drink of drinks" [value]="drink.name">
+          {{drink.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    </div>
-    <div class="chickens" *ngIf="chickens.length>0">
-        <h1>Nos poulets</h1>
-        <div class="list">
-            <ul *ngFor="let chicken of chickens">
-                <li class="item">{{chicken.name}}</li>
-                <li class="item">{{chicken.price}}</li>
-                <!-- <p>{{chicken.desc || "null"}}</p> -->
-            </ul>
-        </div>
-    </div>
-    <div class="drinks" *ngIf="drinks.length>0">
-        <h1>Nos boissons</h1>
-        <div class="list">
-            <ul *ngFor="let drink of drinks">
-                <li class="item">{{drink.name}}</li>
-                <li class="item">{{drink.price}}</li>
-                <!-- <p>{{drink.desc || ""}}</p> -->
-            </ul>
-        </div>
+    <h2>Select chicken</h2>
+    <mat-form-field appearance="fill">
+      <mat-label>Favorite chicken</mat-label>
+      <mat-select [(ngModel)]="selectedChicken" name="chicken">
+        <mat-option *ngFor="let chicken of chickens" [value]="chicken.name">
+          {{chicken.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    </div>
-    <div class="sauces" *ngIf="sauces.length>0">
-        <h1>Nos sauces</h1>
-        <div class="list">
-            <ul *ngFor="let sauce of sauces">
-                <li class="item">{{sauce.name}}</li>
-                <li class="item">{{sauce.price}}</li>
-                <!-- <p>{{sauce.desc || ""}}</p> -->
-            </ul>
-        </div>
-
+    <h2>Select your sauce</h2>
+    <mat-form-field appearance="fill">
+      <mat-label>Favorite sauce</mat-label>
+      <mat-select [(ngModel)]="selectedSauce" name="sauce">
+        <mat-option *ngFor="let sauce of sauces" [value]="sauce.name">
+          {{sauce.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
     </div>
 
-
-</div>
+</form>
