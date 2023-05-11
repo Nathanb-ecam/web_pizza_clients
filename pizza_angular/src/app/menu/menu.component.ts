@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Product,RestaurantService } from '../restaurant.service';
+import { Menu, Product,RestaurantService } from '../restaurant.service';
 
 
 
@@ -14,14 +14,13 @@ export class MenuComponent {
   drinks:Product[]= [];
   chickens:Product[]= [];
   sauces:Product[]= [];
-
+  
 
   selectedPizza:Product=new Product;
   selectedDrink:Product=new Product;
   selectedChicken:Product=new Product;
   selectedSauce:Product=new Product;
 
-  imageUrl:string="";
   constructor(private restauService : RestaurantService){
 
   }
@@ -67,4 +66,20 @@ export class MenuComponent {
       }
     )
   }
+
+  addToCart(pizza:Product, drink:Product, chicken:Product, sauce:Product){
+    let menu_items:Product[]= [pizza,drink,chicken,sauce];
+
+    for (var item of menu_items){
+      if (item.id == undefined) {
+        alert('please fill all field !');
+        return;
+      }
+    }
+
+    this.restauService.cart.push(menu_items);
+    alert('menu added to cart');
+  }
+
+  
 }

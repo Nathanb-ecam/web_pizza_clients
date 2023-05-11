@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {MatSelectModule} from '@angular/material/select';
     AdminComponent,
     MenuEditComponent,
     SigninCardComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,

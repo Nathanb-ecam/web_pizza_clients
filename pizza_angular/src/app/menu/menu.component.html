@@ -15,17 +15,17 @@
     <mat-form-field appearance="fill">
       <mat-label>Favorite drink</mat-label>
       <mat-select [(ngModel)]="selectedDrink" name="drink">
-        <mat-option *ngFor="let drink of drinks" [value]="drink.name">
+        <mat-option *ngFor="let drink of drinks" [value]="drink">
           {{drink.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <h2>Select chicken</h2>
+    <h2>Select your chicken</h2>
     <mat-form-field appearance="fill">
       <mat-label>Favorite chicken</mat-label>
       <mat-select [(ngModel)]="selectedChicken" name="chicken">
-        <mat-option *ngFor="let chicken of chickens" [value]="chicken.name">
+        <mat-option *ngFor="let chicken of chickens" [value]="chicken">
           {{chicken.name}}
         </mat-option>
       </mat-select>
@@ -35,11 +35,20 @@
     <mat-form-field appearance="fill">
       <mat-label>Favorite sauce</mat-label>
       <mat-select [(ngModel)]="selectedSauce" name="sauce">
-        <mat-option *ngFor="let sauce of sauces" [value]="sauce.name">
+        <mat-option *ngFor="let sauce of sauces" [value]="sauce">
           {{sauce.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
     </div>
 
+    <div class="buttons">
+        <div class="cart">
+            <button mat-flat-button color="primary" (click)="addToCart(selectedPizza,selectedDrink,selectedChicken,selectedSauce)">add to cart</button>
+        </div>
+
+        <div class="validate">
+            <button mat-flat-button color="primary" routerLink="/order">validate orders</button>
+        </div>
+    </div>
 </form>

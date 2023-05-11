@@ -5,3 +5,24 @@
   transform: translate(-50%, -50%);
   padding: 10px;
 }
+
+.buttons{
+  position: relative;
+  display: inline;
+}
+
+.cart{
+  display: inline-block;
+  justify-content: left;
+  position: fixed;
+  bottom: 10%;
+  left: 10%;
+}
+
+.validate{
+  display: inline-block;
+  justify-content: right;
+  position: fixed;
+  bottom: 10%;
+  right: 10%;
+}
