@@ -7,7 +7,7 @@ import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-menu-edit',
   templateUrl: './menu-edit.component.html',
-  styleUrls: ['./menu-edit.component.css']
+  styleUrls: ['./menu-edit.component.scss']
 })
 export class MenuEditComponent {
   token:string='';
