@@ -1,31 +1,51 @@
-<mat-dialog-content *ngIf="currentselection!=null">
+<div class="dialog" mat-dialog-content *ngIf="currentselection!=null">
     <form (ngSubmit)="updateMenu()">
         <!-- <mat-card> -->
-            <mat-label>Menu n°{{currentselection.menu_id}}</mat-label>
-            <mat-form-field appearance="fill">
-                <mat-label>{{selectedPizza}}</mat-label>
-                <mat-select matNativeControl  [(ngModel)]="selectedPizza" name="pizza">
-                    <mat-option *ngFor="let p of pizzas"  [value]="p.name" >{{ p.name }}</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="fill">
-                <mat-label>{{selectedChicken}}</mat-label>
-                <mat-select matNativeControl [(ngModel)]="selectedChicken" name="chicken">
-                    <mat-option *ngFor="let p of chickens" [value]="p.name" >{{ p.name }}</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="fill">
-                <mat-label>{{selectedDrink}}</mat-label>
-                <mat-select  matNativeControl [(ngModel)]="selectedDrink" name="drink">
-                    <mat-option *ngFor="let p of drinks" [value]="p.name" >{{ p.name }}</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="fill">
-                <mat-label>{{selectedDrink}}</mat-label>
-                <mat-select  matNativeControl [(ngModel)]="selectedSauce" name="sauce">
-                    <mat-option *ngFor="let p of sauces" [value]="p.name">{{ p.name }}</mat-option>
-                </mat-select>
-            </mat-form-field>
+            <mat-label class="title">Menu n°{{currentselection.menu_id}}</mat-label>
+            <div class="element">
+                <label>Pizza :</label>
+                <mat-form-field appearance="fill">
+                    <mat-label>{{selectedPizza.name}}</mat-label>
+                    <mat-select matNativeControl  [(ngModel)]="selectedPizza" name="pizza">
+                        <mat-option *ngFor="let p of pizzas"  [value]="p" >{{ p.name }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>    
+
+        
+            <div class="element">
+                <label>Poulet :</label>
+                <mat-form-field appearance="fill">
+                    <mat-label>{{selectedChicken.name}}</mat-label>
+                    <mat-select matNativeControl [(ngModel)]="selectedChicken" name="chicken">
+                        <mat-option *ngFor="let p of chickens" [value]="p" >{{ p.name }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>    
+
+
+            <div class="element">
+                <label>Boisson :</label>
+                <mat-form-field appearance="fill">
+                    <mat-label>{{selectedDrink.name}}</mat-label>
+                    <mat-select  matNativeControl [(ngModel)]="selectedDrink" name="drink">
+                        <mat-option *ngFor="let p of drinks" [value]="p" >{{ p.name }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>    
+
+
+            <div class="element">
+                <label>Sauce :</label>
+                <mat-form-field appearance="fill">
+                    <mat-label>{{selectedSauce.name}}</mat-label>
+                    <mat-select  matNativeControl [(ngModel)]="selectedSauce" name="sauce">
+                        <mat-option *ngFor="let p of sauces" [value]="p">{{ p.name }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>    
+
+
             <div class="buttons">
                 <button mat-raised-button (click)="cancel()">Annuler</button>
                 <button mat-flat-button type="submit" color="primary">Modifier</button>
@@ -33,45 +53,45 @@
             
         <!-- </mat-card> -->
     </form>
-</mat-dialog-content>
+</div>
 
 
-<mat-dialog-content *ngIf="currentselection==null">
+<div class="dialog" mat-dialog-content *ngIf="currentselection==null">
     <form (ngSubmit)="addMenu()">
         <!-- <mat-card> -->
-            <mat-label>Créer votre menu</mat-label>
+            <mat-label class="title">Créer votre menu</mat-label>
             <mat-form-field appearance="fill">
                 <mat-label>Pizza</mat-label>
                 <mat-select matNativeControl  [(ngModel)]="selectedPizza" name="pizza"  required>
-                    <mat-option *ngFor="let p of pizzas"  [value]="p.name" >{{ p.name }}</mat-option>
+                    <mat-option *ngFor="let p of pizzas"  [value]="p" >{{ p.name }}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Chicken</mat-label>
                 <mat-select matNativeControl [(ngModel)]="selectedChicken" name="chicken" required>
-                    <mat-option *ngFor="let p of chickens" [value]="p.name" >{{ p.name }}</mat-option>
+                    <mat-option *ngFor="let p of chickens" [value]="p" >{{ p.name }}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Boisson</mat-label>
                 <mat-select  matNativeControl [(ngModel)]="selectedDrink" name="drink" required>
-                    <mat-option *ngFor="let p of drinks" [value]="p.name" >{{ p.name }}</mat-option>
+                    <mat-option *ngFor="let p of drinks" [value]="p" >{{ p.name }}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Sauce</mat-label>
                 <mat-select  matNativeControl [(ngModel)]="selectedSauce" name="sauce" required>
-                    <mat-option *ngFor="let p of sauces" [value]="p.name">{{ p.name }}</mat-option>
+                    <mat-option *ngFor="let p of sauces" [value]="p">{{ p.name }}</mat-option>
                 </mat-select>
             </mat-form-field>
             <div class="buttons">
                 <button mat-raised-button (click)="cancel()">Annuler</button>
-                <button mat-flat-button type="submit" color="primary">Modifier</button>
+                <button mat-flat-button type="submit" color="primary">Ajouter</button>
             </div>
             
         <!-- </mat-card> -->
     </form>
-</mat-dialog-content>
+</div>
 
 
 

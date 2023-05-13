@@ -1,12 +1,32 @@
-mat-dialog-content{
+/* mat-dialog-content{
     width: 100%;
-    /* height: 600px; */
+    height: 600px;
+} */
 
+.dialog{
+    overflow: wrap;
 }
-
-mat-dialog-content form {
+.dialog form {
+    /* padding:4rem 0; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+} 
+
+.title {
+    font-size: 40px;
+    border-bottom: 2px solid gray;
+    width: 100%;
+    height: 15vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+
+.element{
+    margin: 0.3rem 0;
 }

@@ -58,6 +58,7 @@ export class Token{
   "token":string;
   "maxAge":number;
   "isAdmin":boolean;
+  "user_id":number;
 }
 
 
@@ -79,13 +80,17 @@ export class AdminService {
 
 
   // MENU SECTION 
-  getMenusExplicit(token:string):Observable<any>{
+  getMenusExplicit(token:string):Observable<MenuExplicit[]>{
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
-    return this.http.get<MenuExplicit>(this.local_url+"/menusExplicit",{headers:headers})
+    return this.http.get<MenuExplicit[]>(this.local_url+"/menusExplicit",{headers:headers})
   }
   addMenu(menu:Menu,token:string){
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
     return this.http.post(this.local_url+`/menus`,menu,{headers:headers})
+  }
+  modifyMenu(menu:Menu,id:number,token:string){
+    let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
+    return this.http.put(this.local_url+`/menu/${id}`,menu,{headers:headers})
   }
   deleteMenu(id:number,token:string){
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
@@ -94,9 +99,9 @@ export class AdminService {
 
 
 
-  getClients(token:string):Observable<any>{
+  getClients(token:string):Observable<Client[]>{
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
-    return this.http.get(this.local_url+"/users",{headers:headers})
+    return this.http.get<Client[]>(this.local_url+"/users",{headers:headers})
   }
 
   getOrderExtras(token:string):Observable<any>{

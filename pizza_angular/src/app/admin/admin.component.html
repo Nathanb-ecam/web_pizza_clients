@@ -10,12 +10,12 @@
 <p>token : {{token.token}}</p>
 <p>isAdmin :  {{isAdmin}}</p>
 
-<div class="menu-content" *ngIf="signedIn">
-    <div class="menu-title">
-        <h1>Admin dashboard</h1>
+<div class="content" *ngIf="signedIn">
+    <div class="title">
+        <h1>Gestion des menus</h1>
         <button mat-flat-button (click)="addMenu()" color="primary">Add a menu</button>    
     </div>
-    
+
     <table mat-table [dataSource]="menuDataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="menu_id">
             <th mat-header-cell *matHeaderCellDef> Menu_id </th>
@@ -50,15 +50,49 @@
         </ng-container>
     
     
-        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-        <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr> 
+        <tr mat-header-row *matHeaderRowDef="menuColumnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let row; columns: menuColumnsToDisplay;"></tr> 
     
     </table>
+</div>
 
+<div class="content">
+    <div class="title">
+        <h1>Gestion des Clients</h1>
+        <!-- <button mat-flat-button (click)="addMenu()" color="primary">Add a menu</button>     -->
+    </div>
+    <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Michel" #input>
+    </mat-form-field>
 
-
-
+    <table mat-table [dataSource]="clientDataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="Client_id">
+            <th mat-header-cell *matHeaderCellDef> Client_id </th>
+            <td mat-cell *matCellDef="let client"> {{client.user_id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let client"> {{client.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Password">
+            <th mat-header-cell *matHeaderCellDef> Password </th>
+            <td mat-cell *matCellDef="let client"> {{client.password}} </td>
+        </ng-container>
+        <ng-container matColumnDef="isAdmin">
+            <th mat-header-cell *matHeaderCellDef> isAdmin </th>
+            <td mat-cell *matCellDef="let client"> {{client.isAdmin}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Points">
+            <th mat-header-cell *matHeaderCellDef> Points </th>
+            <td mat-cell *matCellDef="let client"> {{client.points}} </td>
+        </ng-container>
     
+    
+        <tr mat-header-row *matHeaderRowDef="clientColumnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let row; columns: clientColumnsToDisplay;"></tr> 
+    
+    </table>
 </div>
 
 

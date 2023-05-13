@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Menu, Product, RestaurantService } from '../restaurant.service';
-import { AdminService, MenuExplicit } from '../admin.service';
+import { AdminService, MenuExplicit, Token } from '../admin.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -10,7 +10,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./menu-edit.component.css']
 })
 export class MenuEditComponent {
-  token:string='';
+  token:Token=new Token;
 
 
   // selectedChicken:string=''
@@ -20,10 +20,10 @@ export class MenuEditComponent {
   sauces:Product[]=[];
 
   currentselection:any;
-  selectedPizza:any;
-  selectedChicken:any;
-  selectedSauce:any;
-  selectedDrink:any;
+  selectedPizza: Product = new Product;
+  selectedChicken:Product = new Product;
+  selectedSauce:Product = new Product;
+  selectedDrink:Product = new Product;
 
   constructor(
       @Inject(MAT_DIALOG_DATA) public data: any,
@@ -31,15 +31,16 @@ export class MenuEditComponent {
       private adminService:AdminService,
       private _dialogRef:MatDialogRef<MenuEditComponent>
     ){
+    console.log('child received data',data);
     this.currentselection = data.menu;
     if (data.token != null){
       this.token = data.token;
     }
     if (this.currentselection!= null){
-      this.selectedChicken = data.menu.Chicken.name;
-      this.selectedPizza = data.menu.Pizza.name;
-      this.selectedDrink = data.menu.Drink.name;
-      this.selectedSauce = data.menu.Sauce.name;
+      this.selectedChicken = data.menu.Chicken;
+      this.selectedPizza = data.menu.Pizza;
+      this.selectedDrink = data.menu.Drink;
+      this.selectedSauce = data.menu.Sauce;
       console.log("current menu",this.currentselection);
     }
 
@@ -51,23 +52,23 @@ export class MenuEditComponent {
   }
 
   addMenu(){
-    // console.log("Menu n°",this.currentselection.menu_id)
+    console.log("Menu n°",this.selectedChicken)
+    console.log("Menu n°",this.selectedPizza)
+    console.log("Menu n°",this.selectedDrink)
+    console.log("Menu n°",this.selectedSauce)
 
     if(this.selectedChicken!=null && this.selectedDrink != null && this.selectedPizza != null && this.selectedSauce != null){
-      // need to get the corresponding ids of that selection 
-      // const selection = this.correspondingElements().map((obj)=>{
-
-      // SELECTION DOESNt CONTaiN THE W_RIGHT ELEMENTS 
       // console.log(menu)
-      let menu = {"idPizza":1,"idChicken":1,"idDrink":1,"idSauce":1}
+      let menu = {"idPizza":this.selectedPizza.id,"idChicken":this.selectedChicken.id,"idDrink":this.selectedDrink.id,"idSauce":this.selectedSauce.id}
       console.log("Trying to add a menu")
       console.log("with token : ",this.token)
-      
-      this.adminService.addMenu(menu,this.token).subscribe(
+      console.log("Menu to add :",menu)
+      this.adminService.addMenu(menu,this.token.token).subscribe(
         data=>{
           console.log(data);
         }
       )
+      this._dialogRef.close()
     }
     else{
       console.log("All fields need to be filled to add a menu")
@@ -81,20 +82,16 @@ export class MenuEditComponent {
     console.log(this.selectedDrink)
     console.log(this.selectedPizza)
     console.log(this.selectedSauce)
-    // const menu:Menu = {"idPizza":0,"idChicken":0,"idDrink":0,"idSauce":0}
-    // this.restauService.addMenu(menu).subscribe({
-      
-    // })
 
+    const menu:Menu = {"idPizza":this.selectedPizza.id,"idChicken":this.selectedChicken.id,"idDrink":this.selectedDrink.id,"idSauce":this.selectedSauce.id}
+    this.adminService.modifyMenu(menu,this.currentselection.menu_id,this.token.token).subscribe(
+      data=>{
+        console.log(data);
+      }
+    )
+    this._dialogRef.close()
   }
 
-    correspondingElements(){
-      const pizza = this.pizzas.find((obj)=>obj.name===this.selectedPizza);
-      const drink = this.drinks.find((obj)=>obj.name===this.selectedDrink);
-      const chicken = this.chickens.find((obj)=>obj.name===this.selectedChicken);
-      const sauce = this.sauces.find((obj)=>obj.name===this.selectedSauce);
-      return [pizza,chicken,drink,sauce]
-    }
 
   cancel(){
     this._dialogRef.close()
