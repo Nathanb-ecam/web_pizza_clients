@@ -1,5 +1,16 @@
-<ion-content>
-  <p>
-    home works!
-  </p>
-</ion-content>
+
+  <div>
+    <p>
+      home works!
+    </p>
+    <ion-list >
+      <ion-item>
+        <label>Chickens</label>
+        <ion-select matNativeControl name="chicken" interface="action-sheet">
+            <ion-select-option *ngFor="let p of chickens" [value]="p" >{{ p }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </ion-list>
+  </div>
+
+
