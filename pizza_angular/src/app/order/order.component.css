@@ -18,3 +18,13 @@
     bottom: 10%;
     right: 10%;
   }
+  .menu-content .menu-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin:0 1rem;
+}
+
+.menu-content {
+    margin: 0 1rem;
+}

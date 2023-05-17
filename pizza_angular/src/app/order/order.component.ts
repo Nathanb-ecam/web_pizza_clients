@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Menu,RestaurantService } from '../restaurant.service';
 import { AdminService } from '../admin.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-order',
@@ -9,7 +10,7 @@ import { AdminService } from '../admin.service';
 })
 export class OrderComponent {
   
-  orderDataSource:any='';
+  orderDataSource:any;
   columnsToDisplay:string[] = [ 'Pizza','Drink','Sauce','Chicken','Price','action'];
 
   constructor(private adminService : AdminService,
@@ -34,7 +35,8 @@ export class OrderComponent {
   }
 
   loadCart(){
-    this.orderDataSource=this.restauService.cart;
+    this.orderDataSource = new MatTableDataSource(this.restauService.cart)
+
   }
   
   deleteMenu(order:any){

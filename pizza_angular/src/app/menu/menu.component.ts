@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Menu, Product,RestaurantService } from '../restaurant.service';
+import { Product,RestaurantService } from '../restaurant.service';
 
 
 
@@ -16,10 +16,15 @@ export class MenuComponent {
   sauces:Product[]= [];
   
 
-  selectedPizza:Product=new Product;
-  selectedDrink:Product=new Product;
-  selectedChicken:Product=new Product;
-  selectedSauce:Product=new Product;
+  menuPizza:Product=new Product;
+  menuChicken:Product=new Product;
+  menuSauce:Product=new Product;
+  menuDrink:Product=new Product;
+  
+  extraDrink:Product=new Product;
+  extraChicken:Product=new Product;
+  extraSauce:Product=new Product;
+  extraPizza:Product=new Product;
 
   constructor(private restauService : RestaurantService){
 
@@ -38,7 +43,6 @@ export class MenuComponent {
     this.restauService.getPizzas().subscribe(
       data => {
         this.pizzas = data;
-        console.log(this.pizzas);
       }
     )
   }
@@ -46,7 +50,6 @@ export class MenuComponent {
     this.restauService.getChickens().subscribe(
       data => {
         this.chickens = data;
-        console.log(this.chickens);
       }
     )
   }
@@ -54,7 +57,6 @@ export class MenuComponent {
     this.restauService.getSauces().subscribe(
       data => {
         this.sauces = data;
-        console.log(this.sauces);
       }
     )
   }
@@ -62,16 +64,15 @@ export class MenuComponent {
     this.restauService.getDrinks().subscribe(
       data => {
         this.drinks = data;
-        console.log(this.drinks);
       }
     )
   }
 
-  addToCart(pizza:Product, drink:Product, chicken:Product, sauce:Product){
-    let menu_items:Product[]= [pizza,drink,chicken,sauce];
-
-    for (var item of menu_items){
-      if (item.id == undefined) {
+  addMenu(pizza:Product, drink:Product, chicken:Product, sauce:Product){
+    let menu_items:any = {pizza:pizza,drink:drink,chicken:chicken,sauce:sauce};
+    
+    for (var item in menu_items){
+      if (menu_items[item].id == undefined) {
         alert('please fill all field !');
         return;
       }
@@ -81,5 +82,26 @@ export class MenuComponent {
     alert('menu added to cart');
   }
 
-  
+  addExtra(extraInfo:String,extra:Product){
+    let all_items  = ["pizza","drink","chicken","sauce"];
+    let EmptyExtra : Product = {"id":0,"name":"/","price":0,"desc":""};
+    let extra_item:any = {};
+
+    if (extra.id == undefined) {
+        alert('please fill this field !');
+        return;
+    }
+
+    for (var item of all_items){
+      if(extraInfo == item){
+        extra_item[item] = extra
+      }
+      else{
+        extra_item[item] = EmptyExtra
+      }
+    }
+    this.restauService.cart.push(extra_item);
+    alert('menu added to cart');
+    
+  }
 }

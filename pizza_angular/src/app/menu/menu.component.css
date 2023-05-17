@@ -1,8 +1,9 @@
-.menu{
+.selection{
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 55%;
   transform: translate(-50%, -50%);
+  width: 60%;
   padding: 10px;
 }
 
@@ -11,18 +12,20 @@
   display: inline;
 }
 
-.cart{
-  display: inline-block;
-  justify-content: left;
-  position: fixed;
-  bottom: 10%;
-  left: 10%;
-}
-
 .validate{
   display: inline-block;
   justify-content: right;
   position: fixed;
   bottom: 10%;
   right: 10%;
+}
+
+.menuPizza, .menuChicken,.menuPizza,.menuDrink {
+  margin-right: 1%;
+}
+
+.addMenu,.addMenu,.addsauce,.addChicken,.addDrink,.addPizza{
+  margin-left: 1%;
+  margin-right: auto;
+  margin-bottom: 1%;
 }

@@ -1,54 +1,115 @@
 <form>
+  <div class="selection">
     <div class="menu">
-    <h2>Select your pizza</h2>
-    <mat-form-field appearance="fill">
+    <h2>Compose your menu</h2>
+
+    <mat-form-field class="menuPizza" appearance="fill">
       <mat-label>Favorite pizza</mat-label>
-      <mat-select [(ngModel)]="selectedPizza" name="pizza">
-        <mat-option *ngFor="let pizza of pizzas" [value]="pizza">
-          {{pizza.name}}
+      <mat-select [(ngModel)]="menuPizza" name="menuPizza">
+        <mat-option *ngFor="let menuPizza of pizzas" [value]="menuPizza">
+          {{menuPizza.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>   
-    <p> Pizza description: {{selectedPizza.desc}} </p>
     
-    <h2>Select your drink</h2>
-    <mat-form-field appearance="fill">
+    
+    <mat-form-field class="menuDrink" appearance="fill">
       <mat-label>Favorite drink</mat-label>
-      <mat-select [(ngModel)]="selectedDrink" name="drink">
-        <mat-option *ngFor="let drink of drinks" [value]="drink">
-          {{drink.name}}
+      <mat-select [(ngModel)]="menuDrink" name="menuDrink">
+        <mat-option *ngFor="let menuDrink of drinks" [value]="menuDrink">
+          {{menuDrink.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <h2>Select your chicken</h2>
-    <mat-form-field appearance="fill">
+
+    <mat-form-field class="menuChicken" appearance="fill">
       <mat-label>Favorite chicken</mat-label>
-      <mat-select [(ngModel)]="selectedChicken" name="chicken">
-        <mat-option *ngFor="let chicken of chickens" [value]="chicken">
-          {{chicken.name}}
+      <mat-select [(ngModel)]="menuChicken" name="menuChicken">
+        <mat-option *ngFor="let menuChicken of chickens" [value]="menuChicken">
+          {{menuChicken.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <h2>Select your sauce</h2>
-    <mat-form-field appearance="fill">
+
+    <mat-form-field class="menuSauce" appearance="fill">
       <mat-label>Favorite sauce</mat-label>
-      <mat-select [(ngModel)]="selectedSauce" name="sauce">
-        <mat-option *ngFor="let sauce of sauces" [value]="sauce">
-          {{sauce.name}}
+      <mat-select [(ngModel)]="menuSauce" name="menuSauce">
+        <mat-option *ngFor="let menuSauce of sauces" [value]="menuSauce">
+          {{menuSauce.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <button mat-flat-button color="primary" class="addMenu" (click)="addMenu(menuPizza,menuDrink,menuChicken,menuSauce)">add to cart</button>
     </div>
 
-    <div class="buttons">
-        <div class="cart">
-            <button mat-flat-button color="primary" (click)="addToCart(selectedPizza,selectedDrink,selectedChicken,selectedSauce)">add to cart</button>
+    <div class="extra">
+      <div class="pizza">
+        <h2>Pizza extra</h2>
+          <mat-form-field appearance="fill">
+            <mat-label>Favorite pizza</mat-label>
+            <mat-select [(ngModel)]="extraPizza" name="extraPizza">
+              <mat-option *ngFor="let extraPizza of pizzas" [value]="extraPizza">
+                {{extraPizza.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>   
+        
+          <button mat-flat-button color="primary" class="addPizza" (click)="addExtra('pizza',extraPizza)">add to cart</button>
+          
         </div>
 
+        <div class="drink">
+          <h2>Drink extra</h2>
+          <mat-form-field appearance="fill">
+            <mat-label>Favorite drink</mat-label>
+            <mat-select [(ngModel)]="extraDrink" name="extraDrink">
+              <mat-option *ngFor="let extraDrink of drinks" [value]="extraDrink">
+                {{extraDrink.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> 
+            
+          <button mat-flat-button color="primary" class="addDrink" (click)="addExtra('drink',extraDrink)">add to cart</button>
+            
+          </div>
+
+          <div class="chicken">
+            <h2>Chicken extra</h2>
+            <mat-form-field appearance="fill">
+              <mat-label>Favorite chicken</mat-label>
+              <mat-select [(ngModel)]="extraChicken" name="extraChicken">
+                <mat-option *ngFor="let extraChicken of chickens" [value]="extraChicken">
+                  {{extraChicken.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+              
+            <button mat-flat-button color="primary" class="addChicken" (click)="addExtra('chicken',extraChicken)">add to cart</button>
+              
+            </div>
+
+            <div class="sauce">
+              <h2>Sauce extra</h2>
+              <mat-form-field appearance="fill">
+                <mat-label>Favorite sauce</mat-label>
+                <mat-select [(ngModel)]="extraSauce" name="extraSauce">
+                  <mat-option *ngFor="let extraSauce of sauces" [value]="extraSauce">
+                    {{extraSauce.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+                
+              <button mat-flat-button color="primary" class="addsauce" (click)="addExtra('sauce',extraSauce)">add to cart</button>
+                
+              </div>
+    </div>
+  </div>
+
+    <div class="buttons">
         <div class="validate">
-            <button mat-flat-button color="primary" routerLink="/order">validate orders</button>
+            <button mat-flat-button color="primary" routerLink="/order">check order</button>
         </div>
     </div>
 </form>
