@@ -31,6 +31,7 @@ export class RestaurantService {
   base_url = "http://pat.infolab.ecam.be:60836/api"
   local_url ="http://localhost:80/api"
 
+  cart: any = [];
 
   constructor(private http : HttpClient) {
 
@@ -58,6 +59,8 @@ export class RestaurantService {
     return this.http.post(this.local_url+"/menus",menu);
   }
 
-
+  getOrders():Observable<any>{
+    return this.http.get(this.local_url+"/orders")
+  }
 
 }

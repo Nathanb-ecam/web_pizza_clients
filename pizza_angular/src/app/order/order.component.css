@@ -1,0 +1,30 @@
+.buttons{
+    position: relative;
+    display: inline;
+  }
+  
+  .previous{
+    display: inline-block;
+    justify-content: left;
+    position: fixed;
+    bottom: 10%;
+    left: 10%;
+  }
+  
+  .confirm{
+    display: inline-block;
+    justify-content: right;
+    position: fixed;
+    bottom: 10%;
+    right: 10%;
+  }
+  .menu-content .menu-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin:0 1rem;
+}
+
+.menu-content {
+    margin: 0 1rem;
+}

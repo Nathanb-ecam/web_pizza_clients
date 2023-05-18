@@ -1,33 +1,31 @@
-
-.container{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
+.selection{
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  padding: 10px;
 }
 
-.container div{
-
-    margin: 1rem;
+.buttons{
+  position: relative;
+  display: inline;
 }
 
-.container h1{
-    padding: 2rem 0;
-    border-bottom: 1px solid black;
+.validate{
+  display: inline-block;
+  justify-content: right;
+  position: fixed;
+  bottom: 10%;
+  right: 10%;
 }
 
-.container ul{
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    margin: 0;
-
+.menuPizza, .menuChicken,.menuPizza,.menuDrink {
+  margin-right: 1%;
 }
-.container .list{
-    
 
-}
-.container .item{
-    margin: 0;
+.addMenu,.addMenu,.addsauce,.addChicken,.addDrink,.addPizza{
+  margin-left: 1%;
+  margin-right: auto;
+  margin-bottom: 1%;
 }
