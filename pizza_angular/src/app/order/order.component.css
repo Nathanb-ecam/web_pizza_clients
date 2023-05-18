@@ -1,9 +1,25 @@
-.buttons{
+/* .buttons{
     position: relative;
     display: inline;
-  }
+  } */
+
+.buttons{
+  background: lightgray;
+  position: fixed;
+  bottom: 0%;
+  width: 100%;
+  height: 5vh;
+}
+.btn{
+  display: flex;
+  flex-direction: row;
+  padding: 0 2rem;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
   
-  .previous{
+  /* .previous{
     display: inline-block;
     justify-content: left;
     position: fixed;
@@ -17,7 +33,7 @@
     position: fixed;
     bottom: 10%;
     right: 10%;
-  }
+  } */
   .menu-content .menu-title{
     display: flex;
     justify-content: space-between;

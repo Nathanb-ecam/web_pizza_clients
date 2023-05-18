@@ -41,15 +41,10 @@
         <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr> 
     
     </table>
-
-
-    <div class="buttons">
-        <div class="previous">
-            <button mat-flat-button color="primary" routerLink="/menu">previous</button>
-        </div>
-
-        <div class="confirm">
-            <button mat-flat-button color="primary" (click)="validate()" >confirm</button>
-        </div>
-    </div>
 </form>   
+<div class="buttons">
+    <div class="btn">
+        <button mat-flat-button color="primary" routerLink="/menu">previous</button>
+        <button mat-flat-button color="primary" (click)="validate()" >confirm</button>
+    </div>
+</div>
