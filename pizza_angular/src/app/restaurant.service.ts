@@ -39,28 +39,28 @@ export class RestaurantService {
 
   // Pizza crud 
   getPizzas():Observable<any>{
-    return this.http.get(this.base_url+"/pizzas")
+    return this.http.get(this.local_url+"/pizzas")
   }
 
   getDrinks():Observable<any>{
-    return this.http.get(this.base_url+"/drinks")
+    return this.http.get(this.local_url+"/drinks")
   }
   getChickens():Observable<any>{
-    return this.http.get(this.base_url+"/chickens")
+    return this.http.get(this.local_url+"/chickens")
   }
   getExtras():Observable<any>{
-    return this.http.get(this.base_url+"/extras")
+    return this.http.get(this.local_url+"/extras")
   }
   getSauces():Observable<any>{
-    return this.http.get(this.base_url+"/sauces")
+    return this.http.get(this.local_url+"/sauces")
   }
 
   addMenu(menu:Menu):Observable<any>{
-    return this.http.post(this.base_url+"/menus",menu);
+    return this.http.post(this.local_url+"/menus",menu);
   }
 
   getOrders():Observable<any>{
-    return this.http.get(this.base_url+"/orders")
+    return this.http.get(this.local_url+"/orders")
   }
 
 }
