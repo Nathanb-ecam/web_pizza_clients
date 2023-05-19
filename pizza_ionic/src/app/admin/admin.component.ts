@@ -14,8 +14,12 @@ import { MenuEditComponent } from '../menu-edit/menu-edit.component';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent {
-  columnsToDisplay:string[] = ['menu_id', 'Pizza','Drink','Sauce','Chicken','action'];
+  menuColumnsToDisplay:string[] = ['menu_id', 'Pizza','Drink','Sauce','Chicken','action'];
+  clientColumnsToDisplay:string[] = ['Client_id', 'Name','Password','isAdmin','Points'];
+
   menuDataSource:any;
+  clientDataSource:any;
+
 
   username:string="";
   password:string="";
@@ -51,11 +55,15 @@ export class AdminComponent {
 
 
   openDialog(menu:MenuExplicit) {
-    this.dialog.open(MenuEditComponent, {
+    const dialogRef = this.dialog.open(MenuEditComponent, {
       data: {
         menu: menu,
+        token:this.token,
 
       },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.showMenusExplicitTable()
     });
   }
 
@@ -95,7 +103,7 @@ export class AdminComponent {
   }
   showAllTables(){
     // this.showOrderExtrasTable()
-    // this.showClientsTable()
+    this.showClientsTable()
     // this.showPizzaTable()
     this.showMenusExplicitTable()
     // this.showSauceTable()
@@ -112,22 +120,27 @@ export class AdminComponent {
         // this.menus = data;
         this.menuDataSource = new MatTableDataSource(data)
         console.log("this.menus");
-        console.log(this.menus);
+        console.log(data);
       }
     )
   }
 
-  updateMenuRow(){
-    console.log()
-  }
+
 
   showClientsTable(){
     this.adminService.getClients(this.token.token).subscribe(
       data => {
         this.clients = data;
+        this.clientDataSource = new MatTableDataSource(data);
+        // console.log("CLIENTS");
         // console.log(this.clients);
       }
     )
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.clientDataSource.filter = filterValue.trim().toLowerCase();
   }
 
   showOrderExtrasTable(){

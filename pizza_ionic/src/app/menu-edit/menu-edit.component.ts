@@ -37,10 +37,10 @@ export class MenuEditComponent {
       this.token = data.token;
     }
     if (this.currentselection!= null){
-      this.selectedChicken = data.menu.Chicken;
-      this.selectedPizza = data.menu.Pizza;
-      this.selectedDrink = data.menu.Drink;
-      this.selectedSauce = data.menu.Sauce;
+      this.selectedChicken = data.menu.chicken;
+      this.selectedPizza = data.menu.pizza;
+      this.selectedDrink = data.menu.drink;
+      this.selectedSauce = data.menu.sauce;
       console.log("current menu",this.currentselection);
     }
 
@@ -78,6 +78,8 @@ export class MenuEditComponent {
   updateMenu(){
     // need to make a put request once api routes will be modified
     console.log("Menu n°",this.currentselection.menu_id)
+    console.log("TOKINIOS");
+    console.log(this.token.token);
     console.log(this.selectedChicken)
     console.log(this.selectedDrink)
     console.log(this.selectedPizza)
