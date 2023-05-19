@@ -68,7 +68,7 @@ export class Token{
 })
 export class AdminService {
   base_url ="http://pat.infolab.ecam.be:60836/api"
-  local_url ="http://basehost:80/api"
+  local_url ="http://localhost:80/api"
 
   constructor(private http :HttpClient) { 
 
