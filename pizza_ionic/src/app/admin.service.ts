@@ -73,39 +73,41 @@ export class AdminService {
 
   }
 
+  
+
   login(user: User): Observable<Token> {
-    return this.http.post<Token>(this.local_url+"/login",user);
+    return this.http.post<Token>(this.base_url+"/login",user);
   }
 
 
   // MENU SECTION 
   getMenusExplicit(token:string):Observable<any>{
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
-    return this.http.get<MenuExplicit>(this.local_url+"/menusExplicit",{headers:headers})
+    return this.http.get<MenuExplicit>(this.base_url+"/menusExplicit",{headers:headers})
   }
   addMenu(menu:Menu,token:string){
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
-    return this.http.post(this.local_url+`/menus`,menu,{headers:headers})
+    return this.http.post(this.base_url+`/menus`,menu,{headers:headers})
   }
   modifyMenu(menu:Menu,id:number,token:string){
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
-    return this.http.put(this.local_url+`/menu/${id}`,menu,{headers:headers})
+    return this.http.put(this.base_url+`/menu/${id}`,menu,{headers:headers})
   }
   deleteMenu(id:number,token:string){
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
-    return this.http.delete(this.local_url+`/menu/${id}`,{headers:headers})
+    return this.http.delete(this.base_url+`/menu/${id}`,{headers:headers})
   }
 
 
 
   getClients(token:string):Observable<any>{
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
-    return this.http.get(this.local_url+"/users",{headers:headers})
+    return this.http.get(this.base_url+"/users",{headers:headers})
   }
 
   getOrderExtras(token:string):Observable<any>{
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
-    return this.http.get<OrderExtra>(this.local_url+"/orderextras",{headers:headers})
+    return this.http.get<OrderExtra>(this.base_url+"/orderextras",{headers:headers})
   }
 
 }
