@@ -78,7 +78,7 @@ export class MenuComponent {
       }
     }
 
-    this.restauService.cart.push(menu_items);
+    this.restauService.cartMenu.push(menu_items);
     alert('menu added to cart');
   }
 
@@ -100,7 +100,7 @@ export class MenuComponent {
         extra_item[item] = EmptyExtra
       }
     }
-    this.restauService.cart.push(extra_item);
+    this.restauService.cartExtra.push(extra_item);
     alert('menu added to cart');
     
   }

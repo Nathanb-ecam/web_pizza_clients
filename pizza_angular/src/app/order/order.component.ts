@@ -9,7 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent {
-  
+  all_cart:any =this.restauService.cartMenu.concat(this.restauService.cartExtra);
   orderDataSource:any;
   columnsToDisplay:string[] = [ 'Pizza','Drink','Sauce','Chicken','Price','action'];
 
@@ -18,15 +18,13 @@ export class OrderComponent {
 
   }
   validate(){
-    if (this.restauService.cart.length == 0){
+    if (this.all_cart == 0){
         alert('please add something to cart!');
         return;
     }
     else{
-      for (var item of this.restauService.cart){
-        let selectedMenu: Menu={"idSauce":item[3].id,"idChicken":item[2].id,"idPizza":item[0].id,"idDrink":item[1].id}
-        this.restauService.addMenu(selectedMenu)
-      }
+      console.log('this.restauService.cartExtra ',this.restauService.cartExtra);
+      console.log('this.restauService.cartMenu ',this.restauService.cartMenu);
     }
   } 
 
@@ -35,13 +33,21 @@ export class OrderComponent {
   }
 
   loadCart(){
-    this.orderDataSource = new MatTableDataSource(this.restauService.cart)
+    this.orderDataSource = new MatTableDataSource(this.all_cart)
 
   }
   
   deleteMenu(order:any){
-    const emplacement = this.restauService.cart.indexOf(order); 
-    this.restauService.cart.splice(emplacement,1);  
+    const emplacementAllCart = this.all_cart.indexOf(order); 
+    this.all_cart.splice(emplacementAllCart,1);  
     this.loadCart();
+
+    try{
+      const emplacementMenuCart = this.restauService.cartMenu.indexOf(order); 
+      this.all_cart.splice(emplacementMenuCart,1);  
+    }catch{
+      const emplacementExtraCart = this.restauService.cartExtra.indexOf(order); 
+      this.all_cart.splice(emplacementExtraCart,1);  
+    }
   }
 }

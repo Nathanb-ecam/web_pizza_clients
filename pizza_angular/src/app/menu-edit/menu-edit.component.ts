@@ -37,10 +37,10 @@ export class MenuEditComponent {
       this.token = data.token;
     }
     if (this.currentselection!= null){
-      this.selectedChicken = data.menu.Chicken;
-      this.selectedPizza = data.menu.Pizza;
-      this.selectedDrink = data.menu.Drink;
-      this.selectedSauce = data.menu.Sauce;
+      this.selectedChicken = data.menu.chicken;
+      this.selectedPizza = data.menu.pizza;
+      this.selectedDrink = data.menu.drink;
+      this.selectedSauce = data.menu.sauce;
       console.log("current menu",this.currentselection);
     }
 
