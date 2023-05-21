@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -23,6 +23,13 @@ export enum ProductType{
   chicken,
   sauce
 }
+
+let httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': "Bearer tokenToReplace"
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +69,11 @@ export class RestaurantService {
 
   getOrders():Observable<any>{
     return this.http.get(this.base_url+"/orders")
+  }
+
+  addOrder(userId:number,token:string):Observable<any>{
+    let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`);
+    return this.http.post(this.base_url+`/orders/${userId}`,{headers:headers});
   }
 
 }

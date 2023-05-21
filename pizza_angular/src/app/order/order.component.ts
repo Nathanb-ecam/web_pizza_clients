@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Menu,RestaurantService } from '../restaurant.service';
-import { AdminService } from '../admin.service';
+import { AdminService, Token, User } from '../admin.service';
 import { MatTableDataSource } from '@angular/material/table';
+
 
 @Component({
   selector: 'app-order',
@@ -9,9 +10,10 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent {
-  all_cart:any =this.restauService.cartMenu.concat(this.restauService.cartExtra);
+  all_cart:any = this.restauService.cartMenu.concat(this.restauService.cartExtra);
   orderDataSource:any;
   columnsToDisplay:string[] = [ 'Pizza','Drink','Sauce','Chicken','Price','action'];
+  token:Token= new Token();
 
   constructor(private adminService : AdminService,
     private restauService : RestaurantService){
@@ -23,31 +25,47 @@ export class OrderComponent {
         return;
     }
     else{
-      console.log('this.restauService.cartExtra ',this.restauService.cartExtra);
-      console.log('this.restauService.cartMenu ',this.restauService.cartMenu);
+      this.restauService.addOrder(this.token.user_id,this.token.token).subscribe(
+        data => {
+          console.log(data);
+        }
+      )
     }
   } 
 
   ngOnInit(){
     this.loadCart();
+    this.login()
   }
 
   loadCart(){
     this.orderDataSource = new MatTableDataSource(this.all_cart)
 
   }
+
+  login(){
+    let user:User = {"name":"Nath","password":"1234"}
+    this.adminService.login(user).subscribe(
+      data => {
+        this.token = data;
+      }
+    )
+  }
+  
   
   deleteMenu(order:any){
     const emplacementAllCart = this.all_cart.indexOf(order); 
     this.all_cart.splice(emplacementAllCart,1);  
-    this.loadCart();
 
-    try{
       const emplacementMenuCart = this.restauService.cartMenu.indexOf(order); 
-      this.all_cart.splice(emplacementMenuCart,1);  
-    }catch{
-      const emplacementExtraCart = this.restauService.cartExtra.indexOf(order); 
-      this.all_cart.splice(emplacementExtraCart,1);  
-    }
+      if (emplacementMenuCart == -1){
+   
+        const emplacementExtraCart = this.restauService.cartExtra.indexOf(order); 
+        this.restauService.cartExtra.splice(emplacementExtraCart,1);  
+      }
+      else{
+        this.restauService.cartMenu.splice(emplacementMenuCart,1);  
+      }
+    this.loadCart();
   }
 }
