@@ -73,7 +73,7 @@
             <ion-list appearance="fill">
               <ion-item>
                 <label>Pizza</label>
-                <ion-select matNativeControl  [(ngModel)]="selectedPizza" name="pizza"  required>
+                <ion-select matNativeControl  [(ngModel)]="selectedPizza" name="pizza"  required interface="action-sheet">
                     <ion-select-option *ngFor="let p of pizzas"  [value]="p" >{{ p.name }}</ion-select-option>
                 </ion-select>
               </ion-item>
@@ -81,7 +81,7 @@
             <ion-list appearance="fill">
               <ion-item>
                 <label>Chicken</label>
-                <ion-select matNativeControl [(ngModel)]="selectedChicken" name="chicken" required>
+                <ion-select matNativeControl [(ngModel)]="selectedChicken" name="chicken" required interface="action-sheet">
                     <ion-select-option *ngFor="let p of chickens" [value]="p" >{{ p.name }}</ion-select-option>
                 </ion-select>
               </ion-item>
@@ -89,7 +89,7 @@
             <ion-list appearance="fill">
               <ion-item>
                 <label>Boisson</label>
-                <ion-select  matNativeControl [(ngModel)]="selectedDrink" name="drink" required>
+                <ion-select  matNativeControl [(ngModel)]="selectedDrink" name="drink" required interface="action-sheet">
                     <ion-select-option *ngFor="let p of drinks" [value]="p" >{{ p.name }}</ion-select-option>
                 </ion-select>
               </ion-item>
@@ -97,7 +97,7 @@
             <ion-list appearance="fill">
               <ion-item>
                 <label>Sauce</label>
-                <ion-select  matNativeControl [(ngModel)]="selectedSauce" name="sauce" required>
+                <ion-select  matNativeControl [(ngModel)]="selectedSauce" name="sauce" required interface="action-sheet">
                     <ion-select-option *ngFor="let p of sauces" [value]="p">{{ p.name }}</ion-select-option>
                 </ion-select>
               </ion-item>
@@ -110,7 +110,7 @@
                 </ion-button>
                 <ion-button type="submit" fill="outline">
                   <ion-text>
-                    Appliquer
+                    Ajouter
                  </ion-text>  
                 </ion-button>
             </div>

@@ -116,6 +116,7 @@ export class MenuEditComponent {
     this.restauService.getPizzas().subscribe(
       data=>{
         this.pizzas = data;
+        // console.log(this.pizzas);
       }
     );
   }

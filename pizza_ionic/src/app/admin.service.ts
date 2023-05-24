@@ -66,7 +66,7 @@ export class Token{
   providedIn: 'root'
 })
 export class AdminService {
-  base_url ="http://pat.infolab.ecam.be:60836/api"
+  base_url ="https://pat.infolab.ecam.be:64336/api"
   local_url ="http://localhost:80/api"
 
   constructor(private http :HttpClient) { 

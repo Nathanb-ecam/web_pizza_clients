@@ -13,7 +13,7 @@
     <div class="menu-content" *ngIf="isAdmin">
       <div class="menu-title">
           <h1>Admin dashboard</h1>
-          <!-- <button mat-flat-button (click)="addMenu()" color="primary">Add a menu</button>     -->
+          <ion-button mat-flat-button (click)="addMenu()" color="primary">Add a menu</ion-button>    
       </div>
       
       <table mat-table [dataSource]="menuDataSource" class="mat-elevation-z8">
