@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { AdminService } from '../admin.service';
+import { AdminService, User } from '../admin.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin-card',
@@ -17,8 +18,5 @@ export class SigninCardComponent {
   }
 
 
-  login(){
-    console.log(this.username +this.password);
-    
-  }
+
 }

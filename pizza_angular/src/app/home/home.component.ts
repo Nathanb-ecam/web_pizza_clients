@@ -1,6 +1,8 @@
 import { Component,ViewChild } from '@angular/core';
 import { SigninCardComponent } from '../signin-card/signin-card.component';
 import { AdminService, User } from '../admin.service';
+import { Router } from '@angular/router';
+import { DataSharingServiceService } from '../data-sharing-service.service';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +17,28 @@ export class HomeComponent {
   password:string=''
   
 
-  constructor(private adminService : AdminService){
+  constructor(
+    private router : Router,
+    private adminService : AdminService,
+    private sharedData : DataSharingServiceService,
+    ){
 
   }
   login(){
-    let user:User = {"name":this.signinCard.username,"password":this.signinCard.password}
-    console.log(user);
+    let user :User = {"name":this.signinCard.username,"password":this.signinCard.password}
+    this.adminService.login(user).subscribe(
+      data => {
+        console.log("Login status");
+        console.log(data);
+        if(data){
+          this.sharedData.setUser(user);
+          this.sharedData.setToken(data);
+          this.router.navigate(['menu'])
+        }
+
+
+
+      }
+    )
   }
 }

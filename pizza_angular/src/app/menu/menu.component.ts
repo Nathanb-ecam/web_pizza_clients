@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Product,RestaurantService } from '../restaurant.service';
+import { DataSharingServiceService } from '../data-sharing-service.service';
 
 
 
@@ -26,8 +27,12 @@ export class MenuComponent {
   extraSauce:Product=new Product;
   extraPizza:Product=new Product;
 
-  constructor(private restauService : RestaurantService){
-
+  constructor(
+    private sharedData : DataSharingServiceService,
+    private restauService : RestaurantService
+    ){
+    console.log("CURREZNT SHARED DATA")
+    console.log(this.sharedData)
   }
   ngOnInit(){
     this.fetchAll()
