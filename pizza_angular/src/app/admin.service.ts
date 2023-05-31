@@ -46,6 +46,11 @@ export class OrderExtra{
   "idExtraSauce":number;
 }
 
+export class Order{
+  "order_id":number;
+  "user_id":number;
+}
+
 export class Client{
   "user_id":number;
   "name":string;

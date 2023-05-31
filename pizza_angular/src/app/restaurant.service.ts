@@ -1,6 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Order } from './admin.service';
+
+let httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': "Bearer tokenToReplace"
+  })
+};
 
 export class Product{
   "id":number;
@@ -24,12 +32,6 @@ export enum ProductType{
   sauce
 }
 
-let httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': "Bearer tokenToReplace"
-  })
-};
 
 @Injectable({
   providedIn: 'root'
@@ -71,9 +73,10 @@ export class RestaurantService {
     return this.http.get(this.base_url+"/orders")
   }
 
-  addOrder(userId:number,token:string):Observable<any>{
+  addOrder(userId:number,token:string):Observable<Order>{
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`);
-    return this.http.post(this.base_url+`/orders/${userId}`,{headers:headers});
+    console.log(headers);
+    return this.http.post<Order>(this.local_url+`/orders/${userId}`,{},{headers:headers});
   }
 
 }
