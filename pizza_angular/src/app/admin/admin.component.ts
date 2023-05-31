@@ -1,4 +1,4 @@
-import { Component,Inject } from '@angular/core';
+import { Component,Inject, ViewChild } from '@angular/core';
 import { AdminService, MenuExplicit } from '../admin.service';
 import { MenuEntity,OrderExtra,Client,User,Token } from '../admin.service';
 import { Product,ProductType} from '../restaurant.service';
@@ -6,6 +6,8 @@ import { RestaurantService } from '../restaurant.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MenuEditComponent } from '../menu-edit/menu-edit.component';
+import { DataSharingServiceService } from '../data-sharing-service.service';
+import { SigninCardComponent } from '../signin-card/signin-card.component';
 
 
 @Component({
@@ -20,8 +22,8 @@ export class AdminComponent {
   clientDataSource:any;
 
 
-  username:string="";
-  password:string="";
+  // retreive child component properties : username and password
+  @ViewChild(SigninCardComponent) signinCard: any;
 
 
   pizzas:Product[]=[]
@@ -42,6 +44,7 @@ export class AdminComponent {
   constructor(
     private adminService : AdminService,
     private restauService : RestaurantService,
+    private sharedData : DataSharingServiceService,
     public dialog: MatDialog
     ){}
   
@@ -49,8 +52,8 @@ export class AdminComponent {
 
 
   ngOnInit(){
+    this.automatic_login()
 
-    this.login()
   }
 
 
@@ -68,9 +71,25 @@ export class AdminComponent {
 
   }
 
+  automatic_login(){
+    let sharedUser  = this.sharedData.getUser();
+    console.log("sharedUser",sharedUser)
+    if (sharedUser != undefined){
+      let user:User = {"name":sharedUser.name,"password":sharedUser.password}
+      this.make_login_request(user)
+    }
+    else{
+      console.log("Need to display connection form")
+    }
+  }
+
   login(){
-    // let user:User = {"name":this.name,"password":this.password}
-    let user:User = {"name":"Nath","password":"1234"}
+    let user :User = {"name":this.signinCard.username,"password":this.signinCard.password}
+    console.log(user)
+    this.make_login_request(user)
+  }
+
+  make_login_request(user:User){
     this.adminService.login(user).subscribe(
       data => {
         this.token = data;

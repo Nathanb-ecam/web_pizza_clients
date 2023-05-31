@@ -5,7 +5,7 @@ import { Token, User } from './admin.service';
   providedIn: 'root'
 })
 export class DataSharingServiceService {
-  private user : User = new User;
+  private user : any = undefined;
   private token : Token = new Token;
 
   setUser(data: User) {

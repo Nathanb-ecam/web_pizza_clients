@@ -50,9 +50,7 @@
         <tr mat-row *matRowDef="let row; columns: menuColumnsToDisplay;"></tr> 
     
     </table>
-</div>
 
-<div class="content">
     <div class="title">
         <h1>Gestion des Clients</h1>
         <!-- <button mat-flat-button (click)="addMenu()" color="primary">Add a menu</button>     -->
@@ -92,6 +90,9 @@
 </div>
 
 
+<div *ngIf="!isAdmin">
+    <p>Contenu réservé aux administrateurs</p>
+</div>
 
 
 
