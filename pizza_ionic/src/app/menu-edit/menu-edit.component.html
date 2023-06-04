@@ -2,17 +2,18 @@
   <div class="dialog" mat-dialog-content *ngIf="currentselection!=null">
     <form (ngSubmit)="updateMenu()">
         <!-- <mat-card> -->
-            <label class="title">Menu n°{{currentselection.menu_id}}</label>
+          <h1>
+            <ion-text class="title">Menu n°{{currentselection.menu_id}}</ion-text>
+          </h1>
             <div class="element">
                 <label>Pizza :</label>
                 <ion-list appearance="fill" >
                   <ion-item>
-                    <label>{{selectedPizza.name}}</label>
-                    <ion-select matNativeControl  [(ngModel)]="selectedPizza" name="pizza" interface="action-sheet">
+                    <!-- <label>{{selectedPizza.name}}</label> -->
+                    <ion-select matNativeControl  [(ngModel)]="selectedPizza" name="pizza" interface="action-sheet" placeholder={{selectedPizza.name}}>
                         <ion-select-option *ngFor="let p of pizzas"  [value]="p" >{{ p.name }}</ion-select-option>
                     </ion-select>
                   </ion-item>
-  
                 </ion-list>
             </div>    
   
@@ -21,8 +22,7 @@
                 <label>Poulet :</label>
                 <ion-list appearance="fill">
                   <ion-item>
-                    <label>{{selectedChicken.name}}</label>
-                    <ion-select matNativeControl [(ngModel)]="selectedChicken" name="chicken" interface="action-sheet">
+                    <ion-select matNativeControl [(ngModel)]="selectedChicken" name="chicken" interface="action-sheet" placeholder="{{selectedChicken.name}}">
                         <ion-select-option *ngFor="let p of chickens" [value]="p" >{{ p.name }}</ion-select-option>
                     </ion-select>
                   </ion-item>
@@ -34,8 +34,7 @@
                 <label>Boisson :</label>
                 <ion-list appearance="fill">
                   <ion-item>
-                    <label>{{selectedDrink.name}}</label>
-                    <ion-select  matNativeControl [(ngModel)]="selectedDrink" name="drink" interface="action-sheet">
+                    <ion-select  matNativeControl [(ngModel)]="selectedDrink" name="drink" interface="action-sheet" placeholder="{{selectedDrink.name}}">
                         <ion-select-option *ngFor="let p of drinks" [value]="p" >{{ p.name }}</ion-select-option>
                     </ion-select>
                   </ion-item>
@@ -47,8 +46,7 @@
                 <label>Sauce :</label>
                 <ion-list appearance="fill">
                   <ion-item>
-                    <label>{{selectedSauce.name}}</label>
-                    <ion-select  matNativeControl [(ngModel)]="selectedSauce" name="sauce" interface="action-sheet">
+                    <ion-select  matNativeControl [(ngModel)]="selectedSauce" name="sauce" interface="action-sheet" placeholder="{{selectedSauce.name}}">
                         <ion-select-option *ngFor="let p of sauces" [value]="p">{{ p.name }}</ion-select-option>
                     </ion-select>
                   </ion-item>
@@ -57,8 +55,8 @@
   
   
             <div class="buttons">
-                <button mat-raised-button (click)="cancel()">Annuler</button>
-                <button mat-flat-button type="submit" color="primary">Modifier</button>
+                <ion-button mat-raised-button (click)="cancel()">Annuler</ion-button>
+                <ion-button mat-flat-button type="submit" color="primary">Modifier</ion-button>
             </div>
             
         <!-- </mat-card> -->

@@ -1,7 +1,13 @@
-.content{
-
+.dialog h1{
+    display: flex;
+    justify-content: center;
 }
 
-.alert{
-    z-index:999;
+.dialog .buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.content{
+    height: 100%;
 }

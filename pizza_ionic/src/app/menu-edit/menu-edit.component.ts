@@ -57,7 +57,7 @@ export class MenuEditComponent {
     console.log("Menu n°",this.selectedDrink)
     console.log("Menu n°",this.selectedSauce)
 
-    if(this.selectedChicken!=null && this.selectedDrink != null && this.selectedPizza != null && this.selectedSauce != null){
+    if(this.selectedChicken.name!=null && this.selectedDrink.name != null && this.selectedPizza.name != null && this.selectedSauce.name != null){
       // console.log(menu)
       let menu = {"idPizza":this.selectedPizza.id,"idChicken":this.selectedChicken.id,"idDrink":this.selectedDrink.id,"idSauce":this.selectedSauce.id}
       console.log("Trying to add a menu")
@@ -66,9 +66,10 @@ export class MenuEditComponent {
       this.adminService.addMenu(menu,this.token.token).subscribe(
         data=>{
           console.log(data);
+          this._dialogRef.close()
         }
       )
-      this._dialogRef.close()
+
     }
     else{
       console.log("All fields need to be filled to add a menu")
@@ -89,9 +90,10 @@ export class MenuEditComponent {
     this.adminService.modifyMenu(menu,this.currentselection.menu_id,this.token.token).subscribe(
       data=>{
         console.log(data);
+        this._dialogRef.close()
       }
     )
-    this._dialogRef.close()
+    
   }
 
 

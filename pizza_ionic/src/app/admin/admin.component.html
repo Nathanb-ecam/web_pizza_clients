@@ -6,13 +6,11 @@
     </div>
     
     
-    
-    <p>token : {{token.token}}</p>
-    <p>isAdmin :  {{isAdmin}}</p>
-    
-    <div class="menu-content" *ngIf="isAdmin">
+    <div class="content" *ngIf="isAdmin">
       <div class="menu-title">
-          <h1>Admin dashboard</h1>
+          <h1>
+            <ion-title>Admin dashboard</ion-title>
+          </h1>
           <ion-button mat-flat-button (click)="addMenu()" color="primary">Add a menu</ion-button>    
       </div>
       
@@ -61,16 +59,15 @@
     
     <div class="content">
         <div class="title">
-            <h1>Gestion des Clients</h1>
-            <!-- <button mat-flat-button (click)="addMenu()" color="primary">Add a menu</button>     -->
-        </div>
-        <!-- <ion-form-field> -->
+            <h1>
+                <ion-title >Gestion des Clients</ion-title>
+            </h1>
             <form>
-                <label>Filter</label>
-                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Michel" #input>
+                <label>Filtrer</label>
+                <ion-input matInput (keyup)="applyFilter($event)" placeholder="Ex. Michel" #input></ion-input>
             </form>
-            
-        <!-- </ion-form-field> -->
+        </div>
+
 
         <table mat-table [dataSource]="clientDataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="Client_id">

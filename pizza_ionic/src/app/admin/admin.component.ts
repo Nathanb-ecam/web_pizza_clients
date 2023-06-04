@@ -83,14 +83,16 @@ export class AdminComponent {
   }
 
   addMenu(){
-    this.dialog.open(MenuEditComponent, {
+    const dialogRef = this.dialog.open(MenuEditComponent, {
       data: {
         menu:null,
         token:this.token,
 
       },
     });
-  }
+    dialogRef.afterClosed().subscribe(result => {
+      this.showMenusExplicitTable()
+    });  }
 
   deleteMenu(id:number){
     console.log('need to delete menu n°',id);
@@ -98,9 +100,11 @@ export class AdminComponent {
       data=>{
         console.log(`Deleted menu with id ${id}`);
         console.log("Request result",data);
+        this.showMenusExplicitTable()
       }
     )
   }
+
   showAllTables(){
     // this.showOrderExtrasTable()
     this.showClientsTable()
@@ -151,49 +155,5 @@ export class AdminComponent {
       }
     )
   }
-
-
-  showPizzaTable(){
-    this.restauService.getPizzas().subscribe(
-      data => {
-        this.pizzas= data;
-        // console.log("Pizza");
-        // console.log(this.pizzas);
-      }
-    )
-  }
-
-
-
-  showDrinkTable(){
-    this.restauService.getDrinks().subscribe(
-      data => {
-        this.drinks= data;
-        console.log("Drink");
-        console.log(this.drinks);
-      }
-    )
-  }
-  showChickenTable(){
-    this.restauService.getChickens().subscribe(
-      data => {
-        this.chickens= data;
-        console.log("Chicken");
-        console.log(this.chickens);
-      }
-    )
-  }
-  showSauceTable(){
-    this.restauService.getSauces().subscribe(
-      data => {
-        this.sauces= data;
-        console.log("Sauce");
-
-        console.log(this.sauces);
-      }
-    )
-  }
-
-
 
 }
