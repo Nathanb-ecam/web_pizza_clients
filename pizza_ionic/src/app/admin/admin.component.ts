@@ -1,4 +1,4 @@
-import { Component,Inject } from '@angular/core';
+import { Component,Inject, ViewChild } from '@angular/core';
 import { AdminService, MenuExplicit } from '../admin.service';
 import { MenuEntity,OrderExtra,Client,User,Token } from '../admin.service';
 import { Product,ProductType} from '../restaurant.service';
@@ -6,6 +6,8 @@ import { RestaurantService } from '../restaurant.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MenuEditComponent } from '../menu-edit/menu-edit.component';
+import { DataSharingService } from '../data-sharing.service';
+import { SigninCardComponent } from '../signin-card/signin-card.component';
 
 
 @Component({
@@ -16,13 +18,12 @@ import { MenuEditComponent } from '../menu-edit/menu-edit.component';
 export class AdminComponent {
   menuColumnsToDisplay:string[] = ['menu_id', 'Pizza','Drink','Sauce','Chicken','action'];
   clientColumnsToDisplay:string[] = ['Client_id', 'Name','Password','isAdmin','Points'];
-
   menuDataSource:any;
   clientDataSource:any;
 
 
-  username:string="";
-  password:string="";
+  // retreive child component properties : username and password
+  @ViewChild(SigninCardComponent) signinCard: any;
 
 
   pizzas:Product[]=[]
@@ -43,6 +44,7 @@ export class AdminComponent {
   constructor(
     private adminService : AdminService,
     private restauService : RestaurantService,
+    private sharedData : DataSharingService,
     public dialog: MatDialog
     ){}
   
@@ -50,7 +52,8 @@ export class AdminComponent {
 
 
   ngOnInit(){
-    this.login()
+    this.automatic_login()
+
   }
 
 
@@ -65,11 +68,34 @@ export class AdminComponent {
     dialogRef.afterClosed().subscribe(result => {
       this.showMenusExplicitTable()
     });
+
+  }
+
+  automatic_login(){
+    let sharedUser  = this.sharedData.getUser();
+    console.log("sharedUser",sharedUser)
+    if (sharedUser != undefined){
+      let user:User = {"name":sharedUser.name,"password":sharedUser.password}
+      this.make_login_request(user)
+    }
+    else{
+      console.log("Need to display connection form")
+    }
   }
 
   login(){
-    // let user:User = {"name":this.name,"password":this.password}
-    let user:User = {"name":"Nath","password":"1234"}
+    if (this.signinCard.username != '' && this.signinCard.password != ''){
+      let user :User = {"name":this.signinCard.username,"password":this.signinCard.password}
+      console.log(user)
+      this.make_login_request(user)
+    }
+    else{
+      console.log("Veuillez remplir tous les champs du formulaire")
+    }
+
+  }
+
+  make_login_request(user:User){
     this.adminService.login(user).subscribe(
       data => {
         this.token = data;
@@ -92,7 +118,8 @@ export class AdminComponent {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.showMenusExplicitTable()
-    });  }
+    });
+  }
 
   deleteMenu(id:number){
     console.log('need to delete menu n°',id);
@@ -103,8 +130,8 @@ export class AdminComponent {
         this.showMenusExplicitTable()
       }
     )
+    
   }
-
   showAllTables(){
     // this.showOrderExtrasTable()
     this.showClientsTable()
@@ -122,29 +149,31 @@ export class AdminComponent {
     this.adminService.getMenusExplicit(this.token.token).subscribe(
       data => {
         // this.menus = data;
-        this.menuDataSource = new MatTableDataSource(data)
-        console.log("this.menus");
-        console.log(data);
+        this.menuDataSource = new MatTableDataSource(data);
+        // console.log("this.menus DataSource");
+        // console.log(data);
       }
     )
   }
 
-
-
-  showClientsTable(){
-    this.adminService.getClients(this.token.token).subscribe(
-      data => {
-        this.clients = data;
-        this.clientDataSource = new MatTableDataSource(data);
-        // console.log("CLIENTS");
-        // console.log(this.clients);
-      }
-    )
+  updateMenuRow(){
+    console.log()
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.clientDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  
+  showClientsTable(){
+    this.adminService.getClients(this.token.token).subscribe(
+      data => {
+        this.clients = data;
+        this.clientDataSource = new MatTableDataSource(data);
+        console.log(this.clients);
+      }
+    )
   }
 
   showOrderExtrasTable(){
@@ -155,5 +184,4 @@ export class AdminComponent {
       }
     )
   }
-
 }

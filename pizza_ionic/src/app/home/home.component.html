@@ -1,16 +1,4 @@
-
-  <div>
-    <p>
-      home works!
-    </p>
-    <ion-list >
-      <ion-item>
-        <label>Chickens</label>
-        <ion-select matNativeControl name="chicken" interface="action-sheet">
-            <ion-select-option *ngFor="let p of chickens" [value]="p" >{{ p }}</ion-select-option>
-        </ion-select>
-      </ion-item>
-  </ion-list>
-  </div>
-
-
+<form (ngSubmit)="login()" class="signin-form">
+  <ion-label>Identifiez-vous</ion-label>
+  <app-signin-card></app-signin-card>
+</form>

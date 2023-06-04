@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
 import { MenuComponent } from './menu/menu.component';
 import { MenuEditComponent } from './menu-edit/menu-edit.component';
+import { SigninCardComponent } from './signin-card/signin-card.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MenuEditComponent } from './menu-edit/menu-edit.component';
     HomeComponent,
     MenuComponent,
     AdminComponent,
-    MenuEditComponent
+    MenuEditComponent,
+    SigninCardComponent
   ],
   imports: [
     BrowserModule, 
