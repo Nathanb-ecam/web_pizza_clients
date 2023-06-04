@@ -84,9 +84,15 @@ export class AdminComponent {
   }
 
   login(){
-    let user :User = {"name":this.signinCard.username,"password":this.signinCard.password}
-    console.log(user)
-    this.make_login_request(user)
+    if (this.signinCard.username != '' && this.signinCard.password != ''){
+      let user :User = {"name":this.signinCard.username,"password":this.signinCard.password}
+      console.log(user)
+      this.make_login_request(user)
+    }
+    else{
+      console.log("Veuillez remplir tous les champs du formulaire")
+    }
+
   }
 
   make_login_request(user:User){
@@ -144,8 +150,8 @@ export class AdminComponent {
       data => {
         // this.menus = data;
         this.menuDataSource = new MatTableDataSource(data);
-        console.log("this.menus DataSource");
-        console.log(data);
+        // console.log("this.menus DataSource");
+        // console.log(data);
       }
     )
   }
@@ -178,53 +184,4 @@ export class AdminComponent {
       }
     )
   }
-
-
-
-
-
-
-
-
-  showPizzaTable(){
-    this.restauService.getPizzas().subscribe(
-      data => {
-        this.pizzas= data;
-        // console.log("Pizza");
-        // console.log(this.pizzas);
-      }
-    )
-  }
-
-  showDrinkTable(){
-    this.restauService.getDrinks().subscribe(
-      data => {
-        this.drinks= data;
-        console.log("Drink");
-        console.log(this.drinks);
-      }
-    )
-  }
-  showChickenTable(){
-    this.restauService.getChickens().subscribe(
-      data => {
-        this.chickens= data;
-        console.log("Chicken");
-        console.log(this.chickens);
-      }
-    )
-  }
-  showSauceTable(){
-    this.restauService.getSauces().subscribe(
-      data => {
-        this.sauces= data;
-        console.log("Sauce");
-
-        console.log(this.sauces);
-      }
-    )
-  }
-
-
-
 }

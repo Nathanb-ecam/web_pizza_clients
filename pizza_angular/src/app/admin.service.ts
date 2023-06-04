@@ -99,6 +99,7 @@ export class AdminService {
   }
   deleteMenu(id:number,token:string){
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
+    console.log(token)
     return this.http.delete(this.base_url+`/menu/${id}`,{headers:headers})
   }
 

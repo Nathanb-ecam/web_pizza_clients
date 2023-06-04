@@ -76,7 +76,7 @@ export class RestaurantService {
   addOrder(userId:number,token:string):Observable<Order>{
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`);
     console.log(headers);
-    return this.http.post<Order>(this.local_url+`/orders/${userId}`,{},{headers:headers});
+    return this.http.post<Order>(this.base_url+`/orders/${userId}`,{},{headers:headers});
   }
 
 }

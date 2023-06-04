@@ -25,7 +25,18 @@ export class HomeComponent {
 
   }
   login(){
-    let user :User = {"name":this.signinCard.username,"password":this.signinCard.password}
+    console.log("DEBUGGING")
+    if (this.signinCard.username != '' && this.signinCard.password != ''){
+      let user :User = {"name":this.signinCard.username,"password":this.signinCard.password}
+      console.log(user)
+      this.make_login_request(user)
+    }
+    else{
+      console.log("Veuillez remplir tous les champs du formulaire")
+    }
+  }
+
+  make_login_request(user:User){
     this.adminService.login(user).subscribe(
       data => {
         console.log("Login status");
@@ -41,4 +52,8 @@ export class HomeComponent {
       }
     )
   }
+
 }
+
+
+
