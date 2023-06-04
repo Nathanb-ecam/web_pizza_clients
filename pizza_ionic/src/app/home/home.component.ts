@@ -7,7 +7,7 @@ import { DataSharingService } from '../data-sharing.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
   @ViewChild(SigninCardComponent) signinCard: any;
