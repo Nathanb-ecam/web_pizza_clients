@@ -1,4 +1,10 @@
-<form>
+<div class="signin-form" *ngIf="!signedIn">
+  <form (ngSubmit)="login()" class="signin-form">
+      <app-signin-card></app-signin-card>
+  </form>
+</div>
+
+<form *ngIf="signedIn">
   <div class="selection">
 
     <h1>Make your menu</h1>

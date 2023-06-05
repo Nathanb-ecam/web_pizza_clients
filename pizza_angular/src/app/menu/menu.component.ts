@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { Product,RestaurantService } from '../restaurant.service';
 import { DataSharingServiceService } from '../data-sharing-service.service';
-
-
-
+import { User, AdminService} from '../admin.service';
+import { SigninCardComponent } from '../signin-card/signin-card.component';
 
 @Component({
   selector: 'app-menu',
@@ -16,6 +15,7 @@ export class MenuComponent {
   chickens:Product[]= [];
   sauces:Product[]= [];
   
+  @ViewChild(SigninCardComponent) signinCard: any;
 
   menuPizza:Product=new Product;
   menuChicken:Product=new Product;
@@ -27,7 +27,10 @@ export class MenuComponent {
   extraSauce:Product=new Product;
   extraPizza:Product=new Product;
 
+  signedIn:Boolean=false
+
   constructor(
+    private adminService : AdminService,
     private sharedData : DataSharingServiceService,
     private restauService : RestaurantService
     ){
@@ -35,7 +38,8 @@ export class MenuComponent {
     console.log(this.sharedData)
   }
   ngOnInit(){
-    this.fetchAll()
+    this.automatic_login()
+    
   }
 
   fetchAll(){
@@ -86,6 +90,42 @@ export class MenuComponent {
     this.restauService.cartMenu.push(menu_items);
     alert('menu added to cart');
   }
+
+  make_login_request(user:User){
+    this.adminService.login(user).subscribe(
+      data => {
+        this.signedIn=true;
+        this.fetchAll()
+        this.sharedData.setUser(user);
+        this.sharedData.setToken(data);
+      }
+    )
+  }
+
+  login(){
+    if (this.signinCard.username != '' && this.signinCard.password != ''){
+      let user :User = {"name":this.signinCard.username,"password":this.signinCard.password}
+      this.make_login_request(user)
+    }
+    else{
+      console.log("Veuillez remplir tous les champs du formulaire")
+    }
+
+  }
+
+  automatic_login(){
+    let sharedUser  = this.sharedData.getUser();
+    console.log("sharedUser",sharedUser)
+    if (sharedUser != undefined){
+      let user:User = {"name":sharedUser.name,"password":sharedUser.password}
+      this.make_login_request(user)
+      
+    }
+    else{
+      console.log("Need to display connection form")
+    }
+  }
+  
 
   addExtra(extraInfo:String,extra:Product){
     let all_items  = ["pizza","drink","chicken","sauce"];
