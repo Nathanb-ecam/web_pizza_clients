@@ -66,6 +66,9 @@ export class AdminComponent {
       },
     });
     dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.signedIn=false;
+      }
       this.showMenusExplicitTable()
     });
 
@@ -73,7 +76,7 @@ export class AdminComponent {
 
   automatic_login(){
     let sharedUser  = this.sharedData.getUser();
-    console.log("sharedUser",sharedUser)
+    // console.log("sharedUser",sharedUser)
     if (sharedUser != undefined){
       let user:User = {"name":sharedUser.name,"password":sharedUser.password}
       this.make_login_request(user)
@@ -86,7 +89,7 @@ export class AdminComponent {
   login(){
     if (this.signinCard.username != '' && this.signinCard.password != ''){
       let user :User = {"name":this.signinCard.username,"password":this.signinCard.password}
-      console.log(user)
+      // console.log(user)
       this.make_login_request(user)
     }
     else{
@@ -98,11 +101,14 @@ export class AdminComponent {
   make_login_request(user:User){
     this.adminService.login(user).subscribe(
       data => {
+        this.sharedData.setUser(user);
+        this.sharedData.setToken(data);
+        
         this.token = data;
         console.log(this.token);
         this.signedIn=true;
         this.isAdmin= data.isAdmin;
-        console.log("isAdmin"+ this.isAdmin)
+        // console.log("isAdmin"+ this.isAdmin)
         this.showAllTables()
       }
     )
@@ -117,6 +123,9 @@ export class AdminComponent {
       },
     });
     dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.signedIn=false;
+      }
       this.showMenusExplicitTable()
     });
   }
@@ -145,7 +154,7 @@ export class AdminComponent {
 
 
   showMenusExplicitTable(){
-    console.log("Explicit menus");
+    // console.log("Explicit menus");
     this.adminService.getMenusExplicit(this.token.token).subscribe(
       data => {
         // this.menus = data;
@@ -171,7 +180,7 @@ export class AdminComponent {
       data => {
         this.clients = data;
         this.clientDataSource = new MatTableDataSource(data);
-        console.log(this.clients);
+        // console.log(this.clients);
       }
     )
   }
