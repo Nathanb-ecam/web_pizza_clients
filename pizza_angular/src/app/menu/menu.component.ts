@@ -89,7 +89,7 @@ export class MenuComponent {
 
   addExtra(extraInfo:String,extra:Product){
     let all_items  = ["pizza","drink","chicken","sauce"];
-    let EmptyExtra : Product = {"id":0,"name":"/","price":0,"desc":""};
+    let EmptyExtra : Product = {"id":null,"name":"/","price":0,"desc":""};
     let extra_item:any = {};
 
     if (extra.id == undefined) {

@@ -11,7 +11,7 @@ let httpOptions = {
 };
 
 export class Product{
-  "id":number;
+  "id":any;
   "name":string;
   "price":number;
   "desc":string;
@@ -23,6 +23,19 @@ export class Menu{
   "idPizza":number;
   "idDrink":number;
 
+}
+
+export class ElementOrder{
+  "idOrder":number;
+  "idMenu":number;
+}
+
+export class OrderExtra{
+  "idOrder":number;
+  "idExtraDrink":number;
+  "idExtraPizza":number;
+  "idExtraChicken":number;
+  "idExtraSauce":number;
 }
 
 export enum ProductType{
@@ -65,8 +78,9 @@ export class RestaurantService {
     return this.http.get(this.base_url+"/sauces")
   }
 
-  addMenu(menu:Menu):Observable<any>{
-    return this.http.post(this.base_url+"/menus",menu);
+  addMenu(menu:Menu,token:string):Observable<any>{
+    let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`);
+    return this.http.post(this.base_url+"/menus",menu,{headers:headers});
   }
 
   getOrders():Observable<any>{
@@ -78,5 +92,15 @@ export class RestaurantService {
     console.log(headers);
     return this.http.post<Order>(this.base_url+`/orders/${userId}`,{},{headers:headers});
   }
+
+ addElementOrder(ElementOrder:ElementOrder,token:string):Observable<any>{
+  let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`);
+  return this.http.post(this.base_url+"/orderelements",ElementOrder,{headers:headers});
+ }
+
+ addOrderExtra(OrderExtra:OrderExtra,token:string):Observable<any>{
+  let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`);
+  return this.http.post(this.base_url+"/orderextras",OrderExtra,{headers:headers});
+ }
 
 }

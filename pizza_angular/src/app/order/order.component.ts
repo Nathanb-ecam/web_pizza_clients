@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Menu,RestaurantService } from '../restaurant.service';
+import { ElementOrder, Menu,OrderExtra,RestaurantService } from '../restaurant.service';
 import { AdminService, Token, User } from '../admin.service';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -26,10 +26,24 @@ export class OrderComponent {
     }
     else{
       this.restauService.addOrder(this.token.user_id,this.token.token).subscribe(
-        data => {
-          console.log(data);
+        orderID => {
+          for (var menu of this.restauService.cartMenu) {
+            let newMenu :Menu = { "idSauce":menu.sauce.id,"idChicken":menu.chicken.id,"idPizza":menu.pizza.id,"idDrink":menu.drink.id};
+            this.restauService.addMenu(newMenu,this.token.token).subscribe(
+              menuID => {
+                let ElementOrder: ElementOrder = {"idOrder":Number(orderID),"idMenu":menuID}
+                this.restauService.addElementOrder(ElementOrder,this.token.token).subscribe()
+              }
+            );
+          }
+
+          for (var extra of this.restauService.cartExtra) {
+            let newExtra :OrderExtra={ "idOrder":Number(orderID),"idExtraDrink":extra.drink.id,"idExtraPizza":extra.pizza.id,"idExtraChicken":extra.chicken.id,"idExtraSauce":extra.sauce.id};
+            this.restauService.addOrderExtra(newExtra,this.token.token).subscribe()
+          }
         }
       )
+      alert('thank you for your order');
     }
   } 
 
