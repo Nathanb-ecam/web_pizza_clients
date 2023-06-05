@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Menu, Product, RestaurantService } from '../restaurant.service';
 import { AdminService, Token } from '../admin.service';
+import { DataSharingServiceService } from '../data-sharing-service.service';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class MenuEditComponent {
       @Inject(MAT_DIALOG_DATA) public data: any,
       private restauService:RestaurantService,
       private adminService:AdminService,
+      private sharedData:DataSharingServiceService,
       private _dialogRef:MatDialogRef<MenuEditComponent>
     ){
     console.log('child received data',data);
@@ -41,7 +43,7 @@ export class MenuEditComponent {
       this.selectedPizza = data.menu.pizza;
       this.selectedDrink = data.menu.drink;
       this.selectedSauce = data.menu.sauce;
-      console.log("current menu",this.currentselection);
+      // console.log("current menu",this.currentselection);
     }
 
 
@@ -52,18 +54,18 @@ export class MenuEditComponent {
   }
 
   addMenu(){
-    console.log("DEBUG")
-    console.log("Menu n°",this.selectedChicken)
-    console.log("Menu n°",this.selectedPizza)
-    console.log("Menu n°",this.selectedDrink)
-    console.log("Menu n°",this.selectedSauce)
+    // console.log("DEBUG")
+    // console.log("Menu n°",this.selectedChicken)
+    // console.log("Menu n°",this.selectedPizza)
+    // console.log("Menu n°",this.selectedDrink)
+    // console.log("Menu n°",this.selectedSauce)
 
     if(this.selectedChicken.name!=null && this.selectedDrink.name != null && this.selectedPizza.name != null && this.selectedSauce.name != null){
       // console.log(menu)
       let menu = {"idPizza":this.selectedPizza.id,"idChicken":this.selectedChicken.id,"idDrink":this.selectedDrink.id,"idSauce":this.selectedSauce.id}
-      console.log("Trying to add a menu")
-      console.log("with token : ",this.token)
-      console.log("Menu to add :",menu)
+      // console.log("Trying to add a menu")
+      // console.log("with token : ",this.token)
+      // console.log("Menu to add :",menu)
       this.adminService.addMenu(menu,this.token.token).subscribe(
         data=>{
           console.log(data);
@@ -78,19 +80,43 @@ export class MenuEditComponent {
   }
   updateMenu(){
     // need to make a put request once api routes will be modified
-    console.log("Menu n°",this.currentselection.menu_id)
-    console.log(this.selectedChicken)
-    console.log(this.selectedDrink)
-    console.log(this.selectedPizza)
-    console.log(this.selectedSauce)
+    // console.log("Menu n°",this.currentselection.menu_id)
+    // console.log(this.selectedChicken)
+    // console.log(this.selectedDrink)
+    // console.log(this.selectedPizza)
+    // console.log(this.selectedSauce)
 
     const menu:Menu = {"idPizza":this.selectedPizza.id,"idChicken":this.selectedChicken.id,"idDrink":this.selectedDrink.id,"idSauce":this.selectedSauce.id}
     this.adminService.modifyMenu(menu,this.currentselection.menu_id,this.token.token).subscribe(
       data=>{
+        console.log("DAAAATAAAAAA")
         console.log(data);
         this._dialogRef.close();
+      },
+      error=>{
+        if(error.statusText =="Unauthorized"){
+          console.log("Unauthorized, need to refresh token")
+          this._dialogRef.close("refresh token");
+        }
+
       }
     )
+  }
+
+  refresh_token(){
+    console.log("Need to refresh token")
+    let u = this.sharedData.getUser()
+    let user = {"name":u.name,"password":u.password}
+    console.log("RENEW USER TOKEN")
+    console.log(user)
+    this.adminService.login(user).subscribe(
+      data => {
+        this.sharedData.setToken(data);
+        this.token = data;
+        return data
+      }
+    )
+    
   }
 
 
