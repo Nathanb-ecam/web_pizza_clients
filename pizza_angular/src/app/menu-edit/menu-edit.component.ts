@@ -54,74 +54,64 @@ export class MenuEditComponent {
   }
 
   addMenu(){
-    // console.log("DEBUG")
-    // console.log("Menu n°",this.selectedChicken)
-    // console.log("Menu n°",this.selectedPizza)
-    // console.log("Menu n°",this.selectedDrink)
-    // console.log("Menu n°",this.selectedSauce)
-
     if(this.selectedChicken.name!=null && this.selectedDrink.name != null && this.selectedPizza.name != null && this.selectedSauce.name != null){
       // console.log(menu)
       let menu = {"idPizza":this.selectedPizza.id,"idChicken":this.selectedChicken.id,"idDrink":this.selectedDrink.id,"idSauce":this.selectedSauce.id}
-      // console.log("Trying to add a menu")
-      // console.log("with token : ",this.token)
-      // console.log("Menu to add :",menu)
       this.adminService.addMenu(menu,this.token.token).subscribe(
         data=>{
-          console.log(data);
-          this._dialogRef.close();
+          // console.log(data);
+          this._dialogRef.close()
+        },
+        error=>{
+          if(error.statusText =="Unauthorized"){
+            console.log("Unauthorized, need to refresh token")
+            this._dialogRef.close("refresh-token");
+          }
         }
       )
     }
     else{
       console.log("All fields need to be filled to add a menu")
     }
-
   }
-  updateMenu(){
-    // need to make a put request once api routes will be modified
-    // console.log("Menu n°",this.currentselection.menu_id)
-    // console.log(this.selectedChicken)
-    // console.log(this.selectedDrink)
-    // console.log(this.selectedPizza)
-    // console.log(this.selectedSauce)
 
+  updateMenu(){
     const menu:Menu = {"idPizza":this.selectedPizza.id,"idChicken":this.selectedChicken.id,"idDrink":this.selectedDrink.id,"idSauce":this.selectedSauce.id}
     this.adminService.modifyMenu(menu,this.currentselection.menu_id,this.token.token).subscribe(
       data=>{
-        console.log("DAAAATAAAAAA")
-        console.log(data);
+        // console.log("DAAAATAAAAAA")
+        // console.log(data);
         this._dialogRef.close();
       },
       error=>{
         if(error.statusText =="Unauthorized"){
           console.log("Unauthorized, need to refresh token")
-          this._dialogRef.close("refresh token");
+          this._dialogRef.close("refresh-token");
         }
-
       }
     )
   }
 
-  refresh_token(){
-    console.log("Need to refresh token")
-    let u = this.sharedData.getUser()
-    let user = {"name":u.name,"password":u.password}
-    console.log("RENEW USER TOKEN")
-    console.log(user)
-    this.adminService.login(user).subscribe(
-      data => {
-        this.sharedData.setToken(data);
-        this.token = data;
-        return data
-      }
-    )
+  // refresh_token(){
+  //   console.log("Need to refresh token")
+  //   let u = this.sharedData.getUser()
+  //   let user = {"name":u.name,"password":u.password}
+  //   console.log("RENEW USER TOKEN")
+  //   console.log(user)
+  //   this.adminService.login(user).subscribe(
+  //     data => {
+  //       this.sharedData.setToken(data);
+  //       this.token = data;
+  //       return data
+  //     }
+  //   )
     
-  }
+  // }
 
 
   cancel(){
-    this._dialogRef.close()
+    console.log("canceled")
+    this._dialogRef.close("cancel")
   }
   fetchAll(){
     this.getChickens()

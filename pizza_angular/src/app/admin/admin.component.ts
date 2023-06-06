@@ -57,7 +57,7 @@ export class AdminComponent {
   }
 
 
-  openDialog(menu:MenuExplicit) {
+  updateMenu(menu:MenuExplicit) {
     const dialogRef = this.dialog.open(MenuEditComponent, {
       data: {
         menu: menu,
@@ -66,12 +66,9 @@ export class AdminComponent {
       },
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
-        this.signedIn=false;
-      }
-      this.showMenusExplicitTable()
+      console.log(result)
+      this.handle_dialog_cases(result);
     });
-
   }
 
   automatic_login(){
@@ -101,11 +98,8 @@ export class AdminComponent {
   make_login_request(user:User){
     this.adminService.login(user).subscribe(
       data => {
-        this.sharedData.setUser(user);
-        this.sharedData.setToken(data);
-        
         this.token = data;
-        console.log(this.token);
+        // console.log(this.token);
         this.signedIn=true;
         this.isAdmin= data.isAdmin;
         // console.log("isAdmin"+ this.isAdmin)
@@ -123,24 +117,26 @@ export class AdminComponent {
       },
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
-        this.signedIn=false;
-      }
-      this.showMenusExplicitTable()
+      console.log(result)
+      this.handle_dialog_cases(result);
     });
   }
 
-  deleteMenu(id:number){
-    console.log('need to delete menu n°',id);
-    this.adminService.deleteMenu(id,this.token.token).subscribe(
-      data=>{
-        console.log(`Deleted menu with id ${id}`);
-        console.log("Request result",data);
-        this.showMenusExplicitTable()
+  handle_dialog_cases(result:String){
+    if(result){
+      if(result=="refresh-token"){
+        this.signedIn=false;
+        this.isAdmin=false;
+      }else{
+        console.log("user canceled modifications")
       }
-    )
-    
+    }
+    else{
+      this.showMenusExplicitTable()
+    }
   }
+
+
   showAllTables(){
     // this.showOrderExtrasTable()
     this.showClientsTable()
