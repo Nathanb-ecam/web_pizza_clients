@@ -20,6 +20,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
 import { OrderComponent } from './order/order.component';
+import { PizzaEditComponent } from './pizza-edit/pizza-edit.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { OrderComponent } from './order/order.component';
     MenuEditComponent,
     SigninCardComponent,
     OrderComponent,
+    PizzaEditComponent,
   ],
   imports: [
     BrowserModule,

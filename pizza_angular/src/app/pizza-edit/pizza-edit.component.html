@@ -1,0 +1,71 @@
+<div class="dialog" mat-dialog-content *ngIf="currentselection!=null">
+    <form (ngSubmit)="updatePizza()">
+        <!-- <mat-card> -->
+            <mat-label class="title">Pizza n°{{currentselection.id}}</mat-label>
+            <div class="element">
+                <label>Nom :</label>
+                <mat-form-field appearance="fill">
+                    <mat-label>{{selectedName}}</mat-label>
+                        <input matInput type="text" [(ngModel)]="selectedName" name="name" required>
+                </mat-form-field>
+            </div>    
+
+        
+            <div class="element">
+                <label>Prix :</label>
+                <mat-form-field appearance="fill">
+                    <mat-label>{{selectedPrice}}</mat-label>
+                    <input matInput type="text" [(ngModel)]="selectedPrice" name="price"required>
+                </mat-form-field>
+            </div>    
+
+
+            <div class="element">
+                <label>Description :</label>
+                <mat-form-field appearance="fill">
+                    <mat-label>{{selectedDesc}}</mat-label>
+                    <input matInput type="text" [(ngModel)]="selectedDesc" name="desc">
+                </mat-form-field>
+            </div>    
+
+
+
+            <div class="buttons">
+                <button mat-raised-button (click)="cancel()">Annuler</button>
+                <button mat-flat-button type="submit" color="primary">Modifier</button>
+            </div>
+            
+        <!-- </mat-card> -->
+    </form>
+</div>
+
+
+<div class="dialog" mat-dialog-content *ngIf="currentselection==null">
+    <form (ngSubmit)="addPizza()">
+        <!-- <mat-card> -->
+            <mat-label class="title">Créer votre Pizza</mat-label>
+            <mat-form-field appearance="fill">
+                <mat-label>Nom</mat-label>
+                <input matInput type="text" [(ngModel)]="selectedName" name="name" required>
+
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Prix</mat-label>
+                <input matInput type="number" [(ngModel)]="selectedPrice" name="price" required>
+
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Description</mat-label>
+                <input matInput type="text" [(ngModel)]="selectedDesc" name="desc">
+            </mat-form-field>
+            <div class="buttons">
+                <button mat-raised-button (click)="cancel()">Annuler</button>
+                <button mat-flat-button type="submit" color="primary">Ajouter</button>
+            </div>
+            
+        <!-- </mat-card> -->
+    </form>
+</div>
+
+
+

@@ -9,7 +9,7 @@
 <div class="content" *ngIf="isAdmin">
     <div class="title">
         <h1>Gestion des menus</h1>
-        <button mat-flat-button (click)="addMenu()" color="primary">Add a menu</button>    
+        <button mat-flat-button (click)="addMenu()" color="primary">Ajouter un menu</button>    
     </div>
 
     <table mat-table [dataSource]="menuDataSource" class="mat-elevation-z8">
@@ -87,6 +87,47 @@
         <tr mat-row *matRowDef="let row; columns: clientColumnsToDisplay;"></tr> 
     
     </table>
+
+
+
+    <div class="title">
+        <h1>Gestion des Pizzas</h1>
+        <button mat-flat-button (click)="addPizza()" color="primary">Ajouter une pizza</button>    
+    </div>
+    <table mat-table [dataSource]="pizzaDataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef> Identifiant </th>
+            <td mat-cell *matCellDef="let pizza"> {{pizza.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef> Nom </th>
+            <td mat-cell *matCellDef="let pizza"> {{pizza.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Price">
+            <th mat-header-cell *matHeaderCellDef> Prix </th>
+            <td mat-cell *matCellDef="let pizza"> {{pizza.price}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Desc">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let pizza"> {{pizza.desc}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let pizza"> 
+                <button mat-icon-button color="Primary" (click)="updatePizza(pizza)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deletePizza(pizza.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="pizzaColumnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let row; columns: pizzaColumnsToDisplay;"></tr> 
+    
+    </table>
+
 </div>
 
 

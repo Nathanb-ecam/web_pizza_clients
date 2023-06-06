@@ -1,13 +1,14 @@
 import { Component,Inject, ViewChild } from '@angular/core';
 import { AdminService, MenuExplicit } from '../admin.service';
 import { MenuEntity,OrderExtra,Client,User,Token } from '../admin.service';
-import { Product,ProductType} from '../restaurant.service';
+import { Product,ProductDto,ProductType} from '../restaurant.service';
 import { RestaurantService } from '../restaurant.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MenuEditComponent } from '../menu-edit/menu-edit.component';
 import { DataSharingServiceService } from '../data-sharing-service.service';
 import { SigninCardComponent } from '../signin-card/signin-card.component';
+import { PizzaEditComponent } from '../pizza-edit/pizza-edit.component';
 
 
 @Component({
@@ -18,8 +19,10 @@ import { SigninCardComponent } from '../signin-card/signin-card.component';
 export class AdminComponent {
   menuColumnsToDisplay:string[] = ['menu_id', 'Pizza','Drink','Sauce','Chicken','action'];
   clientColumnsToDisplay:string[] = ['Client_id', 'Name','Password','isAdmin','Points'];
+  pizzaColumnsToDisplay:string[] = ['Id', 'Name','Price','Desc','Action'];
   menuDataSource:any;
   clientDataSource:any;
+  pizzaDataSource:any;
 
 
   // retreive child component properties : username and password
@@ -57,19 +60,7 @@ export class AdminComponent {
   }
 
 
-  updateMenu(menu:MenuExplicit) {
-    const dialogRef = this.dialog.open(MenuEditComponent, {
-      data: {
-        menu: menu,
-        token:this.token,
 
-      },
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
-      this.handle_dialog_cases(result);
-    });
-  }
 
   automatic_login(){
     let sharedUser  = this.sharedData.getUser();
@@ -122,6 +113,64 @@ export class AdminComponent {
     });
   }
 
+  updateMenu(menu:MenuExplicit) {
+    const dialogRef = this.dialog.open(MenuEditComponent, {
+      data: {
+        menu: menu,
+        token:this.token,
+
+      },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      this.handle_dialog_cases(result);
+    });
+  }
+  
+  addPizza(){
+    const dialogRef = this.dialog.open(PizzaEditComponent, {
+      data: {
+        menu:null,
+        token:this.token,
+
+      },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      this.handle_dialog_cases(result);
+    });
+  }
+
+  updatePizza(pizza:ProductDto) {
+    const dialogRef = this.dialog.open(PizzaEditComponent, {
+      data: {
+        pizza: pizza,
+        token:this.token,
+
+      },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      this.handle_dialog_cases(result);
+    });
+  }
+
+  deletePizza(id:number) {
+    console.log("pizza id to remove",id)
+    this.adminService.deletePizza(id,this.token.token).subscribe(
+      data => {
+        // console.log(data);
+        this.showPizzaTable()
+      },error=>{
+        if(error.status ==500){
+          // dans ce cas il faut d'abord vider les rangées qui dépendent de la pizza a supprimer
+          console.log("damn la petite 500")
+        }
+        console.log("ERROR IN DELETE PIZZA")
+      }
+    )
+  }
+
   handle_dialog_cases(result:String){
     if(result){
       if(result=="refresh-token"){
@@ -133,6 +182,7 @@ export class AdminComponent {
     }
     else{
       this.showMenusExplicitTable()
+      this.showPizzaTable()
     }
   }
 
@@ -142,6 +192,7 @@ export class AdminComponent {
     this.showClientsTable()
     // this.showPizzaTable()
     this.showMenusExplicitTable()
+    this.showPizzaTable()
     // this.showSauceTable()
     // this.showDrinkTable()
     // this.showChickenTable()
@@ -155,6 +206,18 @@ export class AdminComponent {
       data => {
         // this.menus = data;
         this.menuDataSource = new MatTableDataSource(data);
+        // console.log("this.menus DataSource");
+        // console.log(data);
+      }
+    )
+  }
+
+  showPizzaTable(){
+    // console.log("Explicit menus");
+    this.adminService.getPizzas(this.token.token).subscribe(
+      data => {
+        // this.menus = data;
+        this.pizzaDataSource = new MatTableDataSource(data);
         // console.log("this.menus DataSource");
         // console.log(data);
       }
