@@ -160,11 +160,24 @@ export class AdminComponent {
     this.adminService.deletePizza(id,this.token.token).subscribe(
       data => {
         // console.log(data);
-        this.showPizzaTable()
+        this.showAllTables()
       },error=>{
-        if(error.status ==500){
-          // dans ce cas il faut d'abord vider les rangées qui dépendent de la pizza a supprimer
+        console.log(error)
+        if(error.status == 500){
           console.log("damn la petite 500")
+          this.adminService.deletePizzaDependencies(id,this.token.token).subscribe(
+              data=>{
+                console.log(data);
+                this.showAllTables()
+              },error =>{
+                if(error.statusText =="Unauthorized"){
+                  console.log("Unauthorized, need to refresh token")
+                  this.signedIn = false;
+                  this.isAdmin = false;
+                }
+                console.log(error)
+              }
+          )
         }
         console.log("ERROR IN DELETE PIZZA")
       }
@@ -213,11 +226,13 @@ export class AdminComponent {
   }
 
   showPizzaTable(){
-    // console.log("Explicit menus");
+    console.log("new pizzas");
     this.adminService.getPizzas(this.token.token).subscribe(
       data => {
         // this.menus = data;
         this.pizzaDataSource = new MatTableDataSource(data);
+        console.log(data);
+
         // console.log("this.menus DataSource");
         // console.log(data);
       }

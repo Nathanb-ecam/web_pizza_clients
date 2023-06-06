@@ -120,6 +120,11 @@ export class AdminService {
     return this.http.delete(this.base_url+`/pizza/${id}`,{headers:headers})
   }
 
+  deletePizzaDependencies(idPizza:number,token:string){
+    let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
+    return this.http.delete(this.base_url+`/pizzaDependencies/${idPizza}`,{headers:headers})
+  }
+
 
 
   getClients(token:string):Observable<Client[]>{
