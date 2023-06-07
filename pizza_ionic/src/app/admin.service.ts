@@ -17,7 +17,10 @@ export class User{
   "password":string;
 }
 
-
+export class Order{
+  "order_id":number;
+  "user_id":number;
+}
 
 export class MenuEntity{
   "menu_id":number;
@@ -58,6 +61,7 @@ export class Token{
   "token":string;
   "maxAge":number;
   "isAdmin":boolean;
+  "user_id":number;
 }
 
 

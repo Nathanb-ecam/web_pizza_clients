@@ -6,5 +6,118 @@
   </div>
 
 
-<menu></menu>
+  <form *ngIf="signedIn">
+    <div class="selection">
+  
+      <h1>Make your menu</h1>
+  
+      <mat-card>
+        
+        <div class="menuPizza" appearance="fill">
+          <label>Pizza :</label>
+          <ion-list appearance="fill" >
+            <ion-item>
+              <ion-select matNativeControl  [(ngModel)]="menuPizza" name="menuPizza" interface="action-sheet" >
+                  <ion-select-option *ngFor="let menuPizza of pizzas" [value]="menuPizza" >{{menuPizza.name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+      </div>
+        
+      <div class="menuDrink" appearance="fill">
+        <label>Drink :</label>
+        <ion-list appearance="fill" >
+          <ion-item>
+            <ion-select matNativeControl  [(ngModel)]="menuDrink" name="menuDrink" interface="action-sheet" >
+                <ion-select-option *ngFor="let menuDrink of drinks" [value]="menuDrink" >{{menuDrink.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+    </div>
+
+    <div class="menuChicken" appearance="fill">
+      <label>Chicken :</label>
+      <ion-list appearance="fill" >
+        <ion-item>
+          <ion-select matNativeControl  [(ngModel)]="menuChicken" name="menuChicken" interface="action-sheet" >
+              <ion-select-option *ngFor="let menuChicken of chickens" [value]="menuChicken" >{{menuChicken.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+  </div>
+
+
+  <div class="menuSauce" appearance="fill">
+    <label>Chicken :</label>
+    <ion-list appearance="fill" >
+      <ion-item>
+        <ion-select matNativeControl  [(ngModel)]="menuSauce" name="menuSauce" interface="action-sheet" >
+            <ion-select-option *ngFor="let menuSauce of sauces" [value]="menuSauce">{{menuSauce.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+</div>
+        <ion-button mat-flat-button color="primary" class="addMenu" (click)="addMenu(menuPizza,menuDrink,menuChicken,menuSauce)">add menu</ion-button>
+      </mat-card> 
+      
+  
+      <div class="extra">
+        <mat-card class="pizza">
+          <h1>Extra pizza</h1>
+              <ion-list appearance="fill" >
+                <ion-item>
+                  <ion-select matNativeControl  [(ngModel)]="extraPizza" name="extraPizza" interface="action-sheet" >
+                      <ion-select-option *ngFor="let extraPizza of pizzas" [value]="extraPizza" >{{extraPizza.name}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+            <ion-button mat-flat-button color="primary" class="addPizza" (click)="addExtra('pizza',extraPizza)">Add pizza</ion-button>
+          </mat-card>
+  
+          <mat-card class="drink">
+            <h1>Drink extra</h1>
+            <ion-list appearance="fill" >
+              <ion-item>
+                <ion-select matNativeControl  [(ngModel)]="extraDrink" name="extraDrink" interface="action-sheet" >
+                    <ion-select-option *ngFor="let extraDrink of drinks" [value]="extraDrink" >{{extraDrink.name}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+            <ion-button mat-flat-button color="primary" class="addDrink" (click)="addExtra('drink',extraDrink)">Add drink</ion-button>
+          </mat-card>
+  
+          <mat-card class="chicken">
+            <h1>Chicken extra</h1>
+            <ion-list appearance="fill" >
+              <ion-item>
+                <ion-select matNativeControl  [(ngModel)]="extraChicken" name="extraChicken" interface="action-sheet" >
+                    <ion-select-option *ngFor="let extraChicken of chickens" [value]="extraChicken" >{{extraChicken.name}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+            <ion-button mat-flat-button color="primary" class="addChicken" (click)="addExtra('chicken',extraChicken)">Add chicken</ion-button>
+              
+          </mat-card>
+  
+            <mat-card class="sauce">
+              <h1>Sauce extra</h1>
+              <ion-list appearance="fill" >
+                <ion-item>
+                  <ion-select matNativeControl  [(ngModel)]="extraSauce" name="extraSauce" interface="action-sheet" >
+                      <ion-select-option *ngFor="let extraSauce of sauces" [value]="extraSauce" >{{extraSauce.name}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <ion-button mat-flat-button color="primary" class="addsauce" (click)="addExtra('sauce',extraSauce)">Add sauce</ion-button>
+                
+            </mat-card>
+      </div>
+    </div>
+  
+      <div class="buttons">
+          <div class="validate">
+              <ion-button mat-flat-button color="primary" routerLink="/order">check order</ion-button>
+          </div>
+      </div>
+  </form>
 </ion-content>
