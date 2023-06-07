@@ -17,6 +17,12 @@ export class Product{
   "desc":string;
 }
 
+export class ProductDto{
+  "name":string;
+  "price":number;
+  "desc":string;
+}
+
 export class Menu{
   "idSauce":number;
   "idChicken":number;

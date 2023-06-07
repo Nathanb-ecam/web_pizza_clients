@@ -2,7 +2,7 @@ import { HttpClient,HttpHeaders, HttpParamsOptions } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Menu, Product} from './restaurant.service';
+import { Menu, Product, ProductDto} from './restaurant.service';
 
 
 let httpOptions = {
@@ -97,10 +97,32 @@ export class AdminService {
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
     return this.http.put(this.base_url+`/menu/${id}`,menu,{headers:headers})
   }
-  deleteMenu(id:number,token:string){
+
+
+  // PIZZA SECTION
+  getPizzas(token:string):Observable<Product[]>{
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
+    return this.http.get<Product[]>(this.base_url+"/pizzas",{headers:headers})
+  }
+  addPizza(pizza:ProductDto,token:string){
+    let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
+    return this.http.post(this.base_url+`/pizzas`,pizza,{headers:headers})
+  }
+  modifyPizza(pizza:ProductDto,id:number,token:string){
+    let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
+    return this.http.put(this.base_url+`/pizza/${id}`,pizza,{headers:headers})
+  }
+  
+  deletePizza(id:number,token:string){
+    console.log(id)
     console.log(token)
-    return this.http.delete(this.base_url+`/menu/${id}`,{headers:headers})
+    let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
+    return this.http.delete(this.base_url+`/pizza/${id}`,{headers:headers})
+  }
+
+  deletePizzaDependencies(idPizza:number,token:string){
+    let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
+    return this.http.delete(this.base_url+`/pizzaDependencies/${idPizza}`,{headers:headers})
   }
 
 
