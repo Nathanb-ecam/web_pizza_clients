@@ -30,7 +30,7 @@ export class PizzaEditComponent {
       private sharedData:DataSharingServiceService,
       private _dialogRef:MatDialogRef<PizzaEditComponent>
     ){
-    console.log('child received data',data);
+    // console.log('child received data',data);
     this.currentselection = data.pizza;
     if (data.token != null){
       this.token = data.token;
@@ -84,6 +84,9 @@ export class PizzaEditComponent {
         if(error.statusText =="Unauthorized"){
           console.log("Unauthorized, need to refresh token")
           this._dialogRef.close("refresh-token");
+        }
+        else{
+          console.log(error)
         }
       }
     )
