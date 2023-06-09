@@ -11,7 +11,7 @@ import { Product,RestaurantService } from '../restaurant.service';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent  implements OnInit {
-
+ //define array to save product of DB
   pizzas:Product[]= [];
   drinks:Product[]= [];
   chickens:Product[]= [];
@@ -21,7 +21,7 @@ export class MenuComponent  implements OnInit {
   signedIn:boolean=false;
   token:Token=new Token()
 
-  // retreive child component properties : username and password
+  // retreive child component properties
   @ViewChild(SigninCardComponent) signinCard: any;
 
   menuPizza:Product=new Product;
@@ -45,33 +45,42 @@ export class MenuComponent  implements OnInit {
   }
 
   fetchAll(){
+    //load all pizzas/chicken/drink/sauce from the DB
     this.getPizzas()
     this.getChickens()
     this.getDrinks()
     this.getSauces()
   }
+
   getPizzas(){
+    //load all pizza from DB and save to array "pizzas"
     this.restauService.getPizzas().subscribe(
       data => {
         this.pizzas = data;
       }
     )
   }
+
   getChickens(){
+    //load all chicken from DB and save to array "chikens"
     this.restauService.getChickens().subscribe(
       data => {
         this.chickens = data;
       }
     )
   }
+
   getSauces(){
+    //load all sauce from DB and save to array "sauces"
     this.restauService.getSauces().subscribe(
       data => {
         this.sauces = data;
       }
     )
   }
+
   getDrinks(){
+    //load all drink from DB and save to array "drinks"
     this.restauService.getDrinks().subscribe(
       data => {
         this.drinks = data;
@@ -80,6 +89,7 @@ export class MenuComponent  implements OnInit {
   }
 
   addMenu(pizza:Product, drink:Product, chicken:Product, sauce:Product){
+    //function for user to compose a new menu
     let menu_items:any = {pizza:pizza,drink:drink,chicken:chicken,sauce:sauce};
     
     for (var item in menu_items){
@@ -88,17 +98,20 @@ export class MenuComponent  implements OnInit {
         return;
       }
     }
-
+    //push the menu to CartMenu
     this.restauService.cartMenu.push(menu_items);
     alert('menu added to cart');
   }
 
   addExtra(extraInfo:String,extra:Product){
+    // if we select an extra, this extra will be strore to cartExtra
+    // and all another extra will be replace to EmptyExtra
     let all_items  = ["pizza","drink","chicken","sauce"];
     let EmptyExtra : Product = {"id":null,"name":"/","price":0,"desc":""};
     let extra_item:any = {};
 
     if (extra.id == undefined) {
+      //check if no extra is selected
         alert('please fill this field !');
         return;
     }
@@ -117,6 +130,7 @@ export class MenuComponent  implements OnInit {
   }
 
   login(){
+    //make sure username and password are not empty field
     if (this.signinCard.username != '' && this.signinCard.password != ''){
       let user :User = {"name":this.signinCard.username,"password":this.signinCard.password}
       console.log(user)
@@ -129,6 +143,7 @@ export class MenuComponent  implements OnInit {
   }
 
   make_login_request(user:User){
+    //change signeIn state and store user information to share data
     this.adminService.login(user).subscribe(  
       data => {
         this.token = data;
@@ -145,6 +160,7 @@ export class MenuComponent  implements OnInit {
   }
 
   checkSignedIn(){
+    //check if this user have always the token
     let sharedUser  = this.sharedData.getUser();
     console.log("sharedUser",sharedUser)
     if(sharedUser != null){

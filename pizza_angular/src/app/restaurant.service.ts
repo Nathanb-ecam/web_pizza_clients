@@ -66,44 +66,55 @@ export class RestaurantService {
 
    }
 
-  // Pizza crud 
+  // get all pizzas
   getPizzas():Observable<any>{
     return this.http.get(this.base_url+"/pizzas")
   }
 
+  // get all drinks
   getDrinks():Observable<any>{
     return this.http.get(this.base_url+"/drinks")
   }
+
+  // get all chickens
   getChickens():Observable<any>{
     return this.http.get(this.base_url+"/chickens")
   }
+
+  // get all extras
   getExtras():Observable<any>{
     return this.http.get(this.base_url+"/extras")
   }
+
+  // get all sauces
   getSauces():Observable<any>{
     return this.http.get(this.base_url+"/sauces")
   }
 
+  //add a new menu to DB
   addMenu(menu:Menu,token:string):Observable<any>{
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`);
     return this.http.post(this.base_url+"/menus",menu,{headers:headers});
   }
 
+  //get all orders
   getOrders():Observable<any>{
     return this.http.get(this.base_url+"/orders")
   }
 
+  //add a new order to DB
   addOrder(userId:number,token:string):Observable<Order>{
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`);
-    // console.log(headers);
     return this.http.post<Order>(this.base_url+`/orders/${userId}`,{},{headers:headers});
   }
 
+  //add a new elementorder to DB
  addElementOrder(ElementOrder:ElementOrder,token:string):Observable<any>{
   let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`);
   return this.http.post(this.base_url+"/orderelements",ElementOrder,{headers:headers});
  }
 
+ //add a new orderextra to DB
  addOrderExtra(OrderExtra:OrderExtra,token:string):Observable<any>{
   let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`);
   return this.http.post(this.base_url+"/orderextras",OrderExtra,{headers:headers});

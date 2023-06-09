@@ -126,12 +126,13 @@ export class AdminService {
   }
 
 
-
+  // client SECTION
   getClients(token:string):Observable<Client[]>{
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
     return this.http.get<Client[]>(this.base_url+"/users",{headers:headers})
   }
 
+  // order SECTION
   getOrderExtras(token:string):Observable<any>{
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
     return this.http.get<OrderExtra>(this.base_url+"/orderextras",{headers:headers})
