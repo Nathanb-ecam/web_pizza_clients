@@ -1,6 +1,7 @@
     
     <div class="signin-form" *ngIf="!signedIn">
         <form (ngSubmit)="login()" class="signin-form">
+            <mat-label class="page-title">Données d'administrateurs</mat-label>            
             <app-signin-card></app-signin-card>
         </form>
     </div>
@@ -22,7 +23,7 @@
             <td mat-cell *matCellDef="let menu"> {{menu.pizza.name}} </td>
         </ng-container>
         <ng-container matColumnDef="Drink">
-            <th mat-header-cell *matHeaderCellDef> Drink </th>
+            <th mat-header-cell *matHeaderCellDef> Boisson </th>
             <td mat-cell *matCellDef="let menu"> {{menu.drink.name}} </td>
         </ng-container>
         <ng-container matColumnDef="Sauce">
@@ -66,16 +67,16 @@
             <td mat-cell *matCellDef="let client"> {{client.user_id}} </td>
         </ng-container>
         <ng-container matColumnDef="Name">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <th mat-header-cell *matHeaderCellDef> Nom </th>
             <td mat-cell *matCellDef="let client"> {{client.name}} </td>
         </ng-container>
         <ng-container matColumnDef="Password">
-            <th mat-header-cell *matHeaderCellDef> Password </th>
+            <th mat-header-cell *matHeaderCellDef> Mot de passe </th>
             <td mat-cell *matCellDef="let client"> {{client.password}} </td>
         </ng-container>
         <ng-container matColumnDef="isAdmin">
-            <th mat-header-cell *matHeaderCellDef> isAdmin </th>
-            <td mat-cell *matCellDef="let client"> {{client.isAdmin}} </td>
+            <th mat-header-cell *matHeaderCellDef> Administrateur </th>
+            <td mat-cell *matCellDef="let client"> <input type="checkbox" [(ngModel)]=client.isAdmin [disabled]="true"> </td>
         </ng-container>
         <ng-container matColumnDef="Points">
             <th mat-header-cell *matHeaderCellDef> Points </th>
@@ -131,9 +132,9 @@
 </div>
 
 
-<div *ngIf="signedIn">
+<div *ngIf="signedIn" class="admin-message">
     <div *ngIf="!isAdmin">
-        <p>Contenu réservé aux administrateurs</p>
+        <mat-label>Contenu réservé aux administrateurs ...</mat-label>
     </div>
 </div>
 

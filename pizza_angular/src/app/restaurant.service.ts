@@ -57,7 +57,7 @@ export enum ProductType{
 })
 export class RestaurantService {
   base_url = "https://pat.infolab.ecam.be:64336/api"
-  local_url ="http://localhost:80/api"
+  local_url ="http://localhost:3000/api"
 
   cartMenu: any = [];
   cartExtra: any = [];

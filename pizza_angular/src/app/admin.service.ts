@@ -73,7 +73,7 @@ export class Token{
 })
 export class AdminService {
   base_url ="https://pat.infolab.ecam.be:64336/api"
-  local_url ="http://localhost:80/api"
+  local_url ="http://localhost:3000/api"
 
   constructor(private http :HttpClient) { 
 
@@ -114,8 +114,6 @@ export class AdminService {
   }
   
   deletePizza(id:number,token:string){
-    console.log(id)
-    console.log(token)
     let headers = httpOptions.headers.set("Authorization",`Bearer ${token}`)
     return this.http.delete(this.base_url+`/pizza/${id}`,{headers:headers})
   }

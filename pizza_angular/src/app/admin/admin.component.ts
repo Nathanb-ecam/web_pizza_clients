@@ -18,7 +18,7 @@ import { PizzaEditComponent } from '../pizza-edit/pizza-edit.component';
 })
 export class AdminComponent {
   menuColumnsToDisplay:string[] = ['menu_id', 'Pizza','Drink','Sauce','Chicken','action'];
-  clientColumnsToDisplay:string[] = ['Client_id', 'Name','Password','isAdmin','Points'];
+  clientColumnsToDisplay:string[] = ['Client_id', 'Name','isAdmin','Points'];
   pizzaColumnsToDisplay:string[] = ['Id', 'Name','Price','Desc','Action'];
   menuDataSource:any;
   clientDataSource:any;
@@ -156,7 +156,6 @@ export class AdminComponent {
   }
 
   deletePizza(id:number) {
-    console.log("pizza id to remove",id)
     this.adminService.deletePizza(id,this.token.token).subscribe(
       data => {
         // console.log(data);
@@ -164,7 +163,6 @@ export class AdminComponent {
       },error=>{
         console.log(error)
         if(error.status == 500){
-          console.log("damn la petite 500")
           this.adminService.deletePizzaDependencies(id,this.token.token).subscribe(
               data=>{
                 console.log(data);
@@ -227,10 +225,11 @@ export class AdminComponent {
 
   showPizzaTable(){
     console.log("new pizzas");
-    this.adminService.getPizzas(this.token.token).subscribe(
+    this.restauService.getPizzas().subscribe(
       data => {
         // this.menus = data;
         this.pizzaDataSource = new MatTableDataSource(data);
+        console.log()
         console.log(data);
 
         // console.log("this.menus DataSource");
