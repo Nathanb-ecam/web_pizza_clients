@@ -18,7 +18,7 @@ import { PizzaEditComponent } from '../pizza-edit/pizza-edit.component';
 })
 export class AdminComponent {
   menuColumnsToDisplay:string[] = ['menu_id', 'Pizza','Drink','Sauce','Chicken','action'];
-  clientColumnsToDisplay:string[] = ['Client_id', 'Name','Password','isAdmin','Points'];
+  clientColumnsToDisplay:string[] = ['Client_id', 'Name','isAdmin','Points'];
   pizzaColumnsToDisplay:string[] = ['Id', 'Name','Price','Desc','Action'];
   menuDataSource:any;
   clientDataSource:any;
@@ -156,7 +156,7 @@ export class AdminComponent {
   }
 
   deletePizza(id:number) {
-    this.adminService.deletePizzaDependencies(id,this.token.token).subscribe(
+    this.adminService.deletePizza(id,this.token.token).subscribe(
       data => {
         // console.log(data);
         this.showAllTables()

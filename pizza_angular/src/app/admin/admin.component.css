@@ -8,3 +8,32 @@
 .content {
     margin: 0 1rem;
 }
+
+.signin-form form{
+    display: flex;
+    align-items: center;
+    border:1px solid black;
+}
+
+
+.page-title{
+    width: 350px;
+    align-items: center;
+    border-bottom:1px solid black;
+    padding: 1rem 0;
+    font-size: 1.6rem
+    
+}
+
+
+
+
+.admin-message {
+    display: flex;
+    margin-top: 1rem;
+}
+
+.admin-message mat-label{
+    font-size: 1.3rem;
+    margin: 1rem;
+}

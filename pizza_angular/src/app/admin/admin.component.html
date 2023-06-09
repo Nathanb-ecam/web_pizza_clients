@@ -1,6 +1,7 @@
     
     <div class="signin-form" *ngIf="!signedIn">
         <form (ngSubmit)="login()" class="signin-form">
+            <mat-label class="page-title">Données d'administrateurs</mat-label>            
             <app-signin-card></app-signin-card>
         </form>
     </div>
@@ -131,9 +132,9 @@
 </div>
 
 
-<div *ngIf="signedIn">
+<div *ngIf="signedIn" class="admin-message">
     <div *ngIf="!isAdmin">
-        <p>Contenu réservé aux administrateurs</p>
+        <mat-label>Contenu réservé aux administrateurs ...</mat-label>
     </div>
 </div>
 

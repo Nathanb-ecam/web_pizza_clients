@@ -1,5 +1,11 @@
-mat-label{
+.signin-form mat-label{
     border-bottom:1px solid black;
     padding: 1rem 0;
-    font-size: 2rem;
+    font-size: 1.6rem;
+    width: 350px;
+}
+
+.signin-form{
+    display: flex;
+    align-items: center;
 }
