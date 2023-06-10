@@ -70,32 +70,28 @@
             <label class="title">Créer votre menu</label>
             <ion-list appearance="fill">
               <ion-item>
-                <label>Pizza</label>
-                <ion-select matNativeControl  [(ngModel)]="selectedPizza" name="pizza"  required interface="action-sheet">
+                <ion-select matNativeControl  [(ngModel)]="selectedPizza" name="pizza"  required interface="action-sheet" placeholder="Pizza">
                     <ion-select-option *ngFor="let p of pizzas"  [value]="p" >{{ p.name }}</ion-select-option>
                 </ion-select>
               </ion-item>
             </ion-list>
             <ion-list appearance="fill">
               <ion-item>
-                <label>Chicken</label>
-                <ion-select matNativeControl [(ngModel)]="selectedChicken" name="chicken" required interface="action-sheet">
+                <ion-select matNativeControl [(ngModel)]="selectedChicken" name="chicken" required interface="action-sheet" placeholder="Chicken">
                     <ion-select-option *ngFor="let p of chickens" [value]="p" >{{ p.name }}</ion-select-option>
                 </ion-select>
               </ion-item>
             </ion-list>
             <ion-list appearance="fill">
               <ion-item>
-                <label>Boisson</label>
-                <ion-select  matNativeControl [(ngModel)]="selectedDrink" name="drink" required interface="action-sheet">
+                <ion-select  matNativeControl [(ngModel)]="selectedDrink" name="drink" required interface="action-sheet" placeholder="Boisson">
                     <ion-select-option *ngFor="let p of drinks" [value]="p" >{{ p.name }}</ion-select-option>
                 </ion-select>
               </ion-item>
             </ion-list>
             <ion-list appearance="fill">
               <ion-item>
-                <label>Sauce</label>
-                <ion-select  matNativeControl [(ngModel)]="selectedSauce" name="sauce" required interface="action-sheet">
+                <ion-select  matNativeControl [(ngModel)]="selectedSauce" name="sauce" required interface="action-sheet" placeholder="Sauce">
                     <ion-select-option *ngFor="let p of sauces" [value]="p">{{ p.name }}</ion-select-option>
                 </ion-select>
               </ion-item>

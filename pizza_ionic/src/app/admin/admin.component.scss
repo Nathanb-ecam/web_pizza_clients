@@ -1,8 +1,6 @@
-.menu-title{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+
+
+
 .content{
     margin: 0 1rem;
 
@@ -11,6 +9,8 @@
 .content .title{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
 }
 
 .content .title form{
@@ -22,4 +22,27 @@
 
 .content .title form label{
     width: 45%;
+}
+
+
+.signin-form ion-text{
+    // border-bottom:1px solid black;
+    padding: 1rem 0;
+    font-size: 1.6rem;
+    width: 350px;
+}
+
+
+
+.signin-form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+.signin-form app-signin-card{
+    width: 350px;
+    
 }

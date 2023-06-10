@@ -25,7 +25,7 @@ export class HomeComponent {
 
   }
   login(){
-    console.log("DEBUGGING")
+    // console.log("DEBUGGING")
     if (this.signinCard.username != '' && this.signinCard.password != ''){
       let user :User = {"name":this.signinCard.username,"password":this.signinCard.password}
       console.log(user)

@@ -17,7 +17,7 @@ import { SigninCardComponent } from '../signin-card/signin-card.component';
 })
 export class AdminComponent {
   menuColumnsToDisplay:string[] = ['menu_id', 'Pizza','Drink','Sauce','Chicken','action'];
-  clientColumnsToDisplay:string[] = ['Client_id', 'Name','Password','isAdmin','Points'];
+  clientColumnsToDisplay:string[] = ['Client_id', 'Name','isAdmin','Points'];
   menuDataSource:any;
   clientDataSource:any;
 
